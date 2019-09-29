@@ -1,0 +1,416 @@
+[2019-09-19 17:52:07] *** IPN RESPONSE START ***
+[2019-09-19 17:52:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334137,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568904663,"cardId":99684}
+[2019-09-19 17:52:07] [RESPONSE-ERROR]: Order already validated, transaction id 334137
+[2019-09-19 17:54:16] *** IPN RESPONSE START ***
+[2019-09-19 17:54:16] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121139,"externalOrderId":"33","transactionId":334112,"transactionMethod":"card","transactionKind":"card","customerId":41151,"identifier":"_3_20190919162937","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568900886,"cardId":101401}
+[2019-09-19 17:54:16] [RESPONSE-ERROR]: Order already validated, transaction id 334112
+[2019-09-19 17:55:30] *** IPN RESPONSE START ***
+[2019-09-19 17:55:30] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121143,"externalOrderId":"35","transactionId":334113,"transactionMethod":"card","transactionKind":"card","customerId":41154,"identifier":"_3_20190919164909","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568900961,"cardId":101405}
+[2019-09-19 17:55:30] [RESPONSE-ERROR]: Order already validated, transaction id 334113
+[2019-09-19 17:56:29] *** IPN RESPONSE START ***
+[2019-09-19 17:56:29] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121143,"externalOrderId":"35","transactionId":334114,"transactionMethod":"card","transactionKind":"card","customerId":41154,"identifier":"_3_20190919164909","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901020,"cardId":101405}
+[2019-09-19 17:56:29] [RESPONSE-ERROR]: Order already validated, transaction id 334114
+[2019-09-19 17:57:10] *** IPN RESPONSE START ***
+[2019-09-19 17:57:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334137,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568904663,"cardId":99684}
+[2019-09-19 17:57:10] [RESPONSE-ERROR]: Order already validated, transaction id 334137
+[2019-09-19 17:57:11] *** IPN RESPONSE START ***
+[2019-09-19 17:57:11] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334115,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901062,"cardId":99483}
+[2019-09-19 17:57:11] [RESPONSE-ERROR]: Order already validated, transaction id 334115
+[2019-09-19 17:57:13] *** IPN RESPONSE START ***
+[2019-09-19 17:57:13] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":333800,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568814662,"cardId":99483}
+[2019-09-19 17:57:13] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":148,"identifier":"r_148_20190819135046","customerId":39702,"orderId":118113,"cardId":99483,"transactionId":333800,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568814662}
+[2019-09-19 17:57:13] [RESPONSE]: Validating completed for cart ID: 148
+[2019-09-19 17:57:13] [RESPONSE]: Status complete-ok for cart ID: 148
+[2019-09-19 17:57:13] [RESPONSE-ERROR]: Cart #148 could not be loaded
+[2019-09-19 18:02:24] *** IPN RESPONSE START ***
+[2019-09-19 18:02:24] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121144,"externalOrderId":"36","transactionId":334116,"transactionMethod":"card","transactionKind":"card","customerId":41155,"identifier":"_3_20190919165540","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901374,"cardId":101406}
+[2019-09-19 18:02:24] [RESPONSE-ERROR]: Order already validated, transaction id 334116
+[2019-09-19 18:02:57] *** IPN RESPONSE START ***
+[2019-09-19 18:02:57] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121144,"externalOrderId":"36","transactionId":334117,"transactionMethod":"card","transactionKind":"card","customerId":41155,"identifier":"_3_20190919165540","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901408,"cardId":101406}
+[2019-09-19 18:02:57] [RESPONSE-ERROR]: Order already validated, transaction id 334117
+[2019-09-19 18:07:12] *** IPN RESPONSE START ***
+[2019-09-19 18:07:12] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334118,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901663,"cardId":99484}
+[2019-09-19 18:07:12] [RESPONSE-ERROR]: Order already validated, transaction id 334118
+[2019-09-19 18:07:15] *** IPN RESPONSE START ***
+[2019-09-19 18:07:15] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":333804,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568815262,"cardId":99484}
+[2019-09-19 18:07:15] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":149,"identifier":"r_149_20190819140014","customerId":39703,"orderId":118114,"cardId":99484,"transactionId":333804,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568815262}
+[2019-09-19 18:07:15] [RESPONSE]: Validating completed for cart ID: 149
+[2019-09-19 18:07:15] [RESPONSE]: Status complete-ok for cart ID: 149
+[2019-09-19 18:07:15] [RESPONSE-ERROR]: Cart #149 could not be loaded
+[2019-09-19 18:11:05] *** IPN RESPONSE START ***
+[2019-09-19 18:11:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334146,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568905863,"cardId":99488}
+[2019-09-19 18:11:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":151,"identifier":"r_151_20190819151036","customerId":39706,"orderId":118118,"cardId":99488,"transactionId":334146,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568905863}
+[2019-09-19 18:11:05] [RESPONSE]: Validating completed for cart ID: 151
+[2019-09-19 18:11:05] [RESPONSE]: Status complete-ok for cart ID: 151
+[2019-09-19 18:11:05] [RESPONSE-ERROR]: Cart #151 could not be loaded
+[2019-09-19 18:12:07] *** IPN RESPONSE START ***
+[2019-09-19 18:12:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334146,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568905863,"cardId":99488}
+[2019-09-19 18:12:07] [RESPONSE-ERROR]: Order already validated, transaction id 334146
+[2019-09-19 18:12:12] *** IPN RESPONSE START ***
+[2019-09-19 18:12:12] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121145,"externalOrderId":"37","transactionId":334119,"transactionMethod":"card","transactionKind":"card","customerId":41156,"identifier":"_3_20190919170551","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901962,"cardId":101407}
+[2019-09-19 18:12:12] [RESPONSE-ERROR]: Order already validated, transaction id 334119
+[2019-09-19 18:12:47] *** IPN RESPONSE START ***
+[2019-09-19 18:12:47] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121145,"externalOrderId":"37","transactionId":334120,"transactionMethod":"card","transactionKind":"card","customerId":41156,"identifier":"_3_20190919170551","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901998,"cardId":101407}
+[2019-09-19 18:12:47] [RESPONSE-ERROR]: Order already validated, transaction id 334120
+[2019-09-19 18:17:09] *** IPN RESPONSE START ***
+[2019-09-19 18:17:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334146,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568905863,"cardId":99488}
+[2019-09-19 18:17:09] [RESPONSE-ERROR]: Order already validated, transaction id 334146
+[2019-09-19 18:18:19] *** IPN RESPONSE START ***
+[2019-09-19 18:18:19] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121146,"externalOrderId":"38","transactionId":334121,"transactionMethod":"card","transactionKind":"card","customerId":41157,"identifier":"_3_20190919171157","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568902329,"cardId":101408}
+[2019-09-19 18:18:19] [RESPONSE-ERROR]: Order already validated, transaction id 334121
+[2019-09-19 18:18:51] *** IPN RESPONSE START ***
+[2019-09-19 18:18:51] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121146,"externalOrderId":"38","transactionId":334123,"transactionMethod":"card","transactionKind":"card","customerId":41157,"identifier":"_3_20190919171157","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568902362,"cardId":101408}
+[2019-09-19 18:18:51] [RESPONSE-ERROR]: Order already validated, transaction id 334123
+[2019-09-19 18:21:01] *** IPN RESPONSE START ***
+[2019-09-19 18:21:01] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121148,"externalOrderId":"39","transactionId":334124,"transactionMethod":"card","transactionKind":"card","customerId":41158,"identifier":"_3_20190919171440","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568902491,"cardId":101409}
+[2019-09-19 18:21:01] [RESPONSE-ERROR]: Order already validated, transaction id 334124
+[2019-09-19 18:21:24] *** IPN RESPONSE START ***
+[2019-09-19 18:21:24] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121148,"externalOrderId":"39","transactionId":334125,"transactionMethod":"card","transactionKind":"card","customerId":41158,"identifier":"_3_20190919171440","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568902515,"cardId":101409}
+[2019-09-19 18:21:24] [RESPONSE-ERROR]: Order already validated, transaction id 334125
+[2019-09-19 18:34:13] *** IPN RESPONSE START ***
+[2019-09-19 18:34:13] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334127,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568903282,"cardId":99486}
+[2019-09-19 18:34:13] [RESPONSE-ERROR]: Order already validated, transaction id 334127
+[2019-09-19 18:34:14] *** IPN RESPONSE START ***
+[2019-09-19 18:34:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":333807,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568816882,"cardId":99486}
+[2019-09-19 18:34:14] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":150,"identifier":"r_150_20190819142748","customerId":39704,"orderId":118116,"cardId":99486,"transactionId":333807,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568816882}
+[2019-09-19 18:34:14] [RESPONSE]: Validating completed for cart ID: 150
+[2019-09-19 18:34:14] [RESPONSE]: Status complete-ok for cart ID: 150
+[2019-09-19 18:34:14] [RESPONSE-ERROR]: Cart #150 could not be loaded
+[2019-09-19 18:57:12] *** IPN RESPONSE START ***
+[2019-09-19 18:57:12] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334137,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568904663,"cardId":99684}
+[2019-09-19 18:57:12] [RESPONSE-ERROR]: Order already validated, transaction id 334137
+[2019-09-19 18:57:13] *** IPN RESPONSE START ***
+[2019-09-19 18:57:13] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":333819,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568818262,"cardId":99684}
+[2019-09-19 18:57:13] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":155,"identifier":"r_155_20190822145053","customerId":39827,"orderId":118357,"cardId":99684,"transactionId":333819,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568818262}
+[2019-09-19 18:57:13] [RESPONSE]: Validating completed for cart ID: 155
+[2019-09-19 18:57:13] [RESPONSE]: Status complete-ok for cart ID: 155
+[2019-09-19 18:57:13] [RESPONSE-ERROR]: Cart #155 could not be loaded
+[2019-09-20 15:05:05] *** IPN RESPONSE START ***
+[2019-09-20 15:05:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334326,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568981103,"cardId":99550}
+[2019-09-20 15:05:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":152,"identifier":"r_152_20190820120438","customerId":39754,"orderId":118199,"cardId":99550,"transactionId":334326,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568981103}
+[2019-09-20 15:05:05] [RESPONSE]: Validating completed for cart ID: 152
+[2019-09-20 15:05:05] [RESPONSE]: Status complete-ok for cart ID: 152
+[2019-09-20 15:05:05] [RESPONSE-ERROR]: Cart #152 could not be loaded
+[2019-09-20 15:06:09] *** IPN RESPONSE START ***
+[2019-09-20 15:06:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334326,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568981103,"cardId":99550}
+[2019-09-20 15:06:09] [RESPONSE-ERROR]: Order already validated, transaction id 334326
+[2019-09-20 15:11:11] *** IPN RESPONSE START ***
+[2019-09-20 15:11:11] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334326,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568981103,"cardId":99550}
+[2019-09-20 15:11:11] [RESPONSE-ERROR]: Order already validated, transaction id 334326
+[2019-09-20 15:29:49] *** IPN RESPONSE START ***
+[2019-09-20 15:29:49] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121089,"externalOrderId":"31","transactionId":334053,"transactionMethod":"card","transactionKind":"card","customerId":41139,"identifier":"_4_20190919142324","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568892216,"cardId":101373}
+[2019-09-20 15:29:49] [RESPONSE-ERROR]: Order already validated, transaction id 334053
+[2019-09-20 16:11:14] *** IPN RESPONSE START ***
+[2019-09-20 16:11:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334326,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568981103,"cardId":99550}
+[2019-09-20 16:11:14] [RESPONSE-ERROR]: Order already validated, transaction id 334326
+[2019-09-20 16:11:20] *** IPN RESPONSE START ***
+[2019-09-20 16:11:20] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334070,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568894702,"cardId":99550}
+[2019-09-20 16:11:20] [RESPONSE-ERROR]: Order already validated, transaction id 334070
+[2019-09-20 16:27:05] *** IPN RESPONSE START ***
+[2019-09-20 16:27:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334362,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568986023,"cardId":99481}
+[2019-09-20 16:27:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":147,"identifier":"r_147_20190819132630","customerId":39700,"orderId":118111,"cardId":99481,"transactionId":334362,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568986023}
+[2019-09-20 16:27:05] [RESPONSE]: Validating completed for cart ID: 147
+[2019-09-20 16:27:05] [RESPONSE]: Status complete-ok for cart ID: 147
+[2019-09-20 16:27:05] [RESPONSE-ERROR]: Cart #147 could not be loaded
+[2019-09-20 16:28:08] *** IPN RESPONSE START ***
+[2019-09-20 16:28:08] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334362,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568986023,"cardId":99481}
+[2019-09-20 16:28:08] [RESPONSE-ERROR]: Order already validated, transaction id 334362
+[2019-09-20 16:33:10] *** IPN RESPONSE START ***
+[2019-09-20 16:33:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334362,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568986023,"cardId":99481}
+[2019-09-20 16:33:10] [RESPONSE-ERROR]: Order already validated, transaction id 334362
+[2019-09-20 16:46:28] *** IPN RESPONSE START ***
+[2019-09-20 16:46:28] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121111,"externalOrderId":"32","transactionId":334077,"transactionMethod":"card","transactionKind":"card","customerId":41141,"identifier":"_5_20190919154001","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568896815,"cardId":101383}
+[2019-09-20 16:46:28] [RESPONSE-ERROR]: Order already validated, transaction id 334077
+[2019-09-20 16:51:05] *** IPN RESPONSE START ***
+[2019-09-20 16:51:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334368,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568987463,"cardId":99483}
+[2019-09-20 16:51:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":148,"identifier":"r_148_20190819135046","customerId":39702,"orderId":118113,"cardId":99483,"transactionId":334368,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568987463}
+[2019-09-20 16:51:05] [RESPONSE]: Validating completed for cart ID: 148
+[2019-09-20 16:51:05] [RESPONSE]: Status complete-ok for cart ID: 148
+[2019-09-20 16:51:05] [RESPONSE-ERROR]: Cart #148 could not be loaded
+[2019-09-20 16:52:07] *** IPN RESPONSE START ***
+[2019-09-20 16:52:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334368,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568987463,"cardId":99483}
+[2019-09-20 16:52:07] [RESPONSE-ERROR]: Order already validated, transaction id 334368
+[2019-09-20 16:57:10] *** IPN RESPONSE START ***
+[2019-09-20 16:57:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334368,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568987463,"cardId":99483}
+[2019-09-20 16:57:10] [RESPONSE-ERROR]: Order already validated, transaction id 334368
+[2019-09-20 17:01:05] *** IPN RESPONSE START ***
+[2019-09-20 17:01:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334370,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568988063,"cardId":99484}
+[2019-09-20 17:01:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":149,"identifier":"r_149_20190819140014","customerId":39703,"orderId":118114,"cardId":99484,"transactionId":334370,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568988063}
+[2019-09-20 17:01:05] [RESPONSE]: Validating completed for cart ID: 149
+[2019-09-20 17:01:05] [RESPONSE]: Status complete-ok for cart ID: 149
+[2019-09-20 17:01:05] [RESPONSE-ERROR]: Cart #149 could not be loaded
+[2019-09-20 17:02:07] *** IPN RESPONSE START ***
+[2019-09-20 17:02:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334370,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568988063,"cardId":99484}
+[2019-09-20 17:02:07] [RESPONSE-ERROR]: Order already validated, transaction id 334370
+[2019-09-20 17:07:10] *** IPN RESPONSE START ***
+[2019-09-20 17:07:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334370,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568988063,"cardId":99484}
+[2019-09-20 17:07:10] [RESPONSE-ERROR]: Order already validated, transaction id 334370
+[2019-09-20 17:08:44] *** IPN RESPONSE START ***
+[2019-09-20 17:08:44] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121111,"externalOrderId":"32","transactionId":334099,"transactionMethod":"card","transactionKind":"card","customerId":41141,"identifier":"_5_20190919154001","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568898152,"cardId":101383}
+[2019-09-20 17:08:44] [RESPONSE-ERROR]: Order already validated, transaction id 334099
+[2019-09-20 17:28:05] *** IPN RESPONSE START ***
+[2019-09-20 17:28:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334375,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568989683,"cardId":99486}
+[2019-09-20 17:28:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":150,"identifier":"r_150_20190819142748","customerId":39704,"orderId":118116,"cardId":99486,"transactionId":334375,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568989683}
+[2019-09-20 17:28:05] [RESPONSE]: Validating completed for cart ID: 150
+[2019-09-20 17:28:05] [RESPONSE]: Status complete-ok for cart ID: 150
+[2019-09-20 17:28:05] [RESPONSE-ERROR]: Cart #150 could not be loaded
+[2019-09-20 17:29:08] *** IPN RESPONSE START ***
+[2019-09-20 17:29:08] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334375,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568989683,"cardId":99486}
+[2019-09-20 17:29:08] [RESPONSE-ERROR]: Order already validated, transaction id 334375
+[2019-09-20 17:33:13] *** IPN RESPONSE START ***
+[2019-09-20 17:33:13] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334362,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568986023,"cardId":99481}
+[2019-09-20 17:33:13] [RESPONSE-ERROR]: Order already validated, transaction id 334362
+[2019-09-20 17:33:14] *** IPN RESPONSE START ***
+[2019-09-20 17:33:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334106,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568899623,"cardId":99481}
+[2019-09-20 17:33:14] [RESPONSE-ERROR]: Order already validated, transaction id 334106
+[2019-09-20 17:34:10] *** IPN RESPONSE START ***
+[2019-09-20 17:34:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334375,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568989683,"cardId":99486}
+[2019-09-20 17:34:10] [RESPONSE-ERROR]: Order already validated, transaction id 334375
+[2019-09-20 17:35:59] *** IPN RESPONSE START ***
+[2019-09-20 17:35:59] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121139,"externalOrderId":"33","transactionId":334107,"transactionMethod":"card","transactionKind":"card","customerId":41151,"identifier":"_3_20190919162937","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568899788,"cardId":101401}
+[2019-09-20 17:35:59] [RESPONSE-ERROR]: Order already validated, transaction id 334107
+[2019-09-20 17:38:39] *** IPN RESPONSE START ***
+[2019-09-20 17:38:39] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121140,"externalOrderId":"34","transactionId":334108,"transactionMethod":"card","transactionKind":"card","customerId":41152,"identifier":"_3_20190919163215","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568899948,"cardId":101402}
+[2019-09-20 17:38:39] [RESPONSE-ERROR]: Order already validated, transaction id 334108
+[2019-09-20 17:39:51] *** IPN RESPONSE START ***
+[2019-09-20 17:39:51] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121140,"externalOrderId":"34","transactionId":334109,"transactionMethod":"card","transactionKind":"card","customerId":41152,"identifier":"_3_20190919163215","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568900020,"cardId":101402}
+[2019-09-20 17:39:51] [RESPONSE-ERROR]: Order already validated, transaction id 334109
+[2019-09-20 17:51:05] *** IPN RESPONSE START ***
+[2019-09-20 17:51:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334377,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568991062,"cardId":99684}
+[2019-09-20 17:51:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":155,"identifier":"r_155_20190822145053","customerId":39827,"orderId":118357,"cardId":99684,"transactionId":334377,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568991062}
+[2019-09-20 17:51:05] [RESPONSE]: Validating completed for cart ID: 155
+[2019-09-20 17:51:05] [RESPONSE]: Status complete-ok for cart ID: 155
+[2019-09-20 17:51:05] [RESPONSE-ERROR]: Cart #155 could not be loaded
+[2019-09-20 17:52:07] *** IPN RESPONSE START ***
+[2019-09-20 17:52:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334377,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568991062,"cardId":99684}
+[2019-09-20 17:52:07] [RESPONSE-ERROR]: Order already validated, transaction id 334377
+[2019-09-20 17:54:18] *** IPN RESPONSE START ***
+[2019-09-20 17:54:18] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121139,"externalOrderId":"33","transactionId":334112,"transactionMethod":"card","transactionKind":"card","customerId":41151,"identifier":"_3_20190919162937","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568900886,"cardId":101401}
+[2019-09-20 17:54:18] [RESPONSE-ERROR]: Order already validated, transaction id 334112
+[2019-09-20 17:55:32] *** IPN RESPONSE START ***
+[2019-09-20 17:55:32] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121143,"externalOrderId":"35","transactionId":334113,"transactionMethod":"card","transactionKind":"card","customerId":41154,"identifier":"_3_20190919164909","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568900961,"cardId":101405}
+[2019-09-20 17:55:32] [RESPONSE-ERROR]: Order already validated, transaction id 334113
+[2019-09-20 17:56:31] *** IPN RESPONSE START ***
+[2019-09-20 17:56:31] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121143,"externalOrderId":"35","transactionId":334114,"transactionMethod":"card","transactionKind":"card","customerId":41154,"identifier":"_3_20190919164909","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901020,"cardId":101405}
+[2019-09-20 17:56:31] [RESPONSE-ERROR]: Order already validated, transaction id 334114
+[2019-09-20 17:57:09] *** IPN RESPONSE START ***
+[2019-09-20 17:57:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334377,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568991062,"cardId":99684}
+[2019-09-20 17:57:09] [RESPONSE-ERROR]: Order already validated, transaction id 334377
+[2019-09-20 17:57:12] *** IPN RESPONSE START ***
+[2019-09-20 17:57:12] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334368,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568987463,"cardId":99483}
+[2019-09-20 17:57:12] [RESPONSE-ERROR]: Order already validated, transaction id 334368
+[2019-09-20 17:57:13] *** IPN RESPONSE START ***
+[2019-09-20 17:57:13] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334115,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901062,"cardId":99483}
+[2019-09-20 17:57:13] [RESPONSE-ERROR]: Order already validated, transaction id 334115
+[2019-09-20 18:02:28] *** IPN RESPONSE START ***
+[2019-09-20 18:02:28] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121144,"externalOrderId":"36","transactionId":334116,"transactionMethod":"card","transactionKind":"card","customerId":41155,"identifier":"_3_20190919165540","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901374,"cardId":101406}
+[2019-09-20 18:02:28] [RESPONSE-ERROR]: Order already validated, transaction id 334116
+[2019-09-20 18:03:01] *** IPN RESPONSE START ***
+[2019-09-20 18:03:01] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121144,"externalOrderId":"36","transactionId":334117,"transactionMethod":"card","transactionKind":"card","customerId":41155,"identifier":"_3_20190919165540","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901408,"cardId":101406}
+[2019-09-20 18:03:01] [RESPONSE-ERROR]: Order already validated, transaction id 334117
+[2019-09-20 18:07:12] *** IPN RESPONSE START ***
+[2019-09-20 18:07:12] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334370,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568988063,"cardId":99484}
+[2019-09-20 18:07:12] [RESPONSE-ERROR]: Order already validated, transaction id 334370
+[2019-09-20 18:07:14] *** IPN RESPONSE START ***
+[2019-09-20 18:07:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334118,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901663,"cardId":99484}
+[2019-09-20 18:07:14] [RESPONSE-ERROR]: Order already validated, transaction id 334118
+[2019-09-20 18:11:05] *** IPN RESPONSE START ***
+[2019-09-20 18:11:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334386,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568992263,"cardId":99488}
+[2019-09-20 18:11:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":151,"identifier":"r_151_20190819151036","customerId":39706,"orderId":118118,"cardId":99488,"transactionId":334386,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1568992263}
+[2019-09-20 18:11:05] [RESPONSE]: Validating completed for cart ID: 151
+[2019-09-20 18:11:05] [RESPONSE]: Status complete-ok for cart ID: 151
+[2019-09-20 18:11:05] [RESPONSE-ERROR]: Cart #151 could not be loaded
+[2019-09-20 18:12:07] *** IPN RESPONSE START ***
+[2019-09-20 18:12:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334386,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568992263,"cardId":99488}
+[2019-09-20 18:12:07] [RESPONSE-ERROR]: Order already validated, transaction id 334386
+[2019-09-20 18:12:14] *** IPN RESPONSE START ***
+[2019-09-20 18:12:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121145,"externalOrderId":"37","transactionId":334119,"transactionMethod":"card","transactionKind":"card","customerId":41156,"identifier":"_3_20190919170551","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901962,"cardId":101407}
+[2019-09-20 18:12:14] [RESPONSE-ERROR]: Order already validated, transaction id 334119
+[2019-09-20 18:12:49] *** IPN RESPONSE START ***
+[2019-09-20 18:12:49] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121145,"externalOrderId":"37","transactionId":334120,"transactionMethod":"card","transactionKind":"card","customerId":41156,"identifier":"_3_20190919170551","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568901998,"cardId":101407}
+[2019-09-20 18:12:49] [RESPONSE-ERROR]: Order already validated, transaction id 334120
+[2019-09-20 18:17:09] *** IPN RESPONSE START ***
+[2019-09-20 18:17:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334386,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568992263,"cardId":99488}
+[2019-09-20 18:17:09] [RESPONSE-ERROR]: Order already validated, transaction id 334386
+[2019-09-20 18:18:21] *** IPN RESPONSE START ***
+[2019-09-20 18:18:21] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":121146,"externalOrderId":"38","transactionId":334121,"transactionMethod":"card","transactionKind":"card","customerId":41157,"identifier":"_3_20190919171157","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568902329,"cardId":101408}
+[2019-09-20 18:18:21] [RESPONSE-ERROR]: Order already validated, transaction id 334121
+[2019-09-20 18:18:53] *** IPN RESPONSE START ***
+[2019-09-20 18:18:53] [RESPONSE]: Decrypted string: {"status":"refund-ok","transactionStatus":"refund-ok","orderId":121146,"externalOrderId":"38","transactionId":334123,"transactionMethod":"card","transactionKind":"card","customerId":41157,"identifier":"_3_20190919171157","amount":5,"currency":"RON","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568902362,"cardId":101408}
+[2019-09-20 18:18:53] [RESPONSE-ERROR]: Order already validated, transaction id 334123
+[2019-09-21 15:05:06] *** IPN RESPONSE START ***
+[2019-09-21 15:05:06] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334557,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569067502,"cardId":99550}
+[2019-09-21 15:05:06] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":152,"identifier":"r_152_20190820120438","customerId":39754,"orderId":118199,"cardId":99550,"transactionId":334557,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569067502}
+[2019-09-21 15:05:06] [RESPONSE]: Validating completed for cart ID: 152
+[2019-09-21 15:05:06] [RESPONSE]: Status complete-ok for cart ID: 152
+[2019-09-21 15:05:06] [RESPONSE-ERROR]: Cart #152 could not be loaded
+[2019-09-21 15:06:08] *** IPN RESPONSE START ***
+[2019-09-21 15:06:08] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334557,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569067502,"cardId":99550}
+[2019-09-21 15:06:08] [RESPONSE-ERROR]: Order already validated, transaction id 334557
+[2019-09-21 15:11:11] *** IPN RESPONSE START ***
+[2019-09-21 15:11:11] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334557,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569067502,"cardId":99550}
+[2019-09-21 15:11:11] [RESPONSE-ERROR]: Order already validated, transaction id 334557
+[2019-09-21 16:11:14] *** IPN RESPONSE START ***
+[2019-09-21 16:11:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334557,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569067502,"cardId":99550}
+[2019-09-21 16:11:14] [RESPONSE-ERROR]: Order already validated, transaction id 334557
+[2019-09-21 16:11:16] *** IPN RESPONSE START ***
+[2019-09-21 16:11:16] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334326,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568981103,"cardId":99550}
+[2019-09-21 16:11:16] [RESPONSE-ERROR]: Order already validated, transaction id 334326
+[2019-09-21 16:27:05] *** IPN RESPONSE START ***
+[2019-09-21 16:27:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334566,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569072423,"cardId":99481}
+[2019-09-21 16:27:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":147,"identifier":"r_147_20190819132630","customerId":39700,"orderId":118111,"cardId":99481,"transactionId":334566,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569072423}
+[2019-09-21 16:27:05] [RESPONSE]: Validating completed for cart ID: 147
+[2019-09-21 16:27:05] [RESPONSE]: Status complete-ok for cart ID: 147
+[2019-09-21 16:27:05] [RESPONSE-ERROR]: Cart #147 could not be loaded
+[2019-09-21 16:28:07] *** IPN RESPONSE START ***
+[2019-09-21 16:28:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334566,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569072423,"cardId":99481}
+[2019-09-21 16:28:07] [RESPONSE-ERROR]: Order already validated, transaction id 334566
+[2019-09-21 16:33:10] *** IPN RESPONSE START ***
+[2019-09-21 16:33:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334566,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569072423,"cardId":99481}
+[2019-09-21 16:33:10] [RESPONSE-ERROR]: Order already validated, transaction id 334566
+[2019-09-21 16:51:06] *** IPN RESPONSE START ***
+[2019-09-21 16:51:06] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334567,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569073863,"cardId":99483}
+[2019-09-21 16:51:06] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":148,"identifier":"r_148_20190819135046","customerId":39702,"orderId":118113,"cardId":99483,"transactionId":334567,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569073863}
+[2019-09-21 16:51:06] [RESPONSE]: Validating completed for cart ID: 148
+[2019-09-21 16:51:06] [RESPONSE]: Status complete-ok for cart ID: 148
+[2019-09-21 16:51:06] [RESPONSE-ERROR]: Cart #148 could not be loaded
+[2019-09-21 16:52:09] *** IPN RESPONSE START ***
+[2019-09-21 16:52:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334567,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569073863,"cardId":99483}
+[2019-09-21 16:52:09] [RESPONSE-ERROR]: Order already validated, transaction id 334567
+[2019-09-21 16:57:11] *** IPN RESPONSE START ***
+[2019-09-21 16:57:11] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334567,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569073863,"cardId":99483}
+[2019-09-21 16:57:11] [RESPONSE-ERROR]: Order already validated, transaction id 334567
+[2019-09-21 17:01:04] *** IPN RESPONSE START ***
+[2019-09-21 17:01:04] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334568,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569074462,"cardId":99484}
+[2019-09-21 17:01:04] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":149,"identifier":"r_149_20190819140014","customerId":39703,"orderId":118114,"cardId":99484,"transactionId":334568,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569074462}
+[2019-09-21 17:01:04] [RESPONSE]: Validating completed for cart ID: 149
+[2019-09-21 17:01:04] [RESPONSE]: Status complete-ok for cart ID: 149
+[2019-09-21 17:01:04] [RESPONSE-ERROR]: Cart #149 could not be loaded
+[2019-09-21 17:02:07] *** IPN RESPONSE START ***
+[2019-09-21 17:02:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334568,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569074462,"cardId":99484}
+[2019-09-21 17:02:07] [RESPONSE-ERROR]: Order already validated, transaction id 334568
+[2019-09-21 17:07:09] *** IPN RESPONSE START ***
+[2019-09-21 17:07:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334568,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569074462,"cardId":99484}
+[2019-09-21 17:07:09] [RESPONSE-ERROR]: Order already validated, transaction id 334568
+[2019-09-21 17:28:05] *** IPN RESPONSE START ***
+[2019-09-21 17:28:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334569,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569076082,"cardId":99486}
+[2019-09-21 17:28:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":150,"identifier":"r_150_20190819142748","customerId":39704,"orderId":118116,"cardId":99486,"transactionId":334569,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569076082}
+[2019-09-21 17:28:05] [RESPONSE]: Validating completed for cart ID: 150
+[2019-09-21 17:28:05] [RESPONSE]: Status complete-ok for cart ID: 150
+[2019-09-21 17:28:05] [RESPONSE-ERROR]: Cart #150 could not be loaded
+[2019-09-21 17:29:08] *** IPN RESPONSE START ***
+[2019-09-21 17:29:08] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334569,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569076082,"cardId":99486}
+[2019-09-21 17:29:08] [RESPONSE-ERROR]: Order already validated, transaction id 334569
+[2019-09-21 17:33:12] *** IPN RESPONSE START ***
+[2019-09-21 17:33:12] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334566,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569072423,"cardId":99481}
+[2019-09-21 17:33:12] [RESPONSE-ERROR]: Order already validated, transaction id 334566
+[2019-09-21 17:33:15] *** IPN RESPONSE START ***
+[2019-09-21 17:33:15] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334362,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568986023,"cardId":99481}
+[2019-09-21 17:33:15] [RESPONSE-ERROR]: Order already validated, transaction id 334362
+[2019-09-21 17:34:10] *** IPN RESPONSE START ***
+[2019-09-21 17:34:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334569,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569076082,"cardId":99486}
+[2019-09-21 17:34:10] [RESPONSE-ERROR]: Order already validated, transaction id 334569
+[2019-09-21 17:51:06] *** IPN RESPONSE START ***
+[2019-09-21 17:51:06] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334571,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569077463,"cardId":99684}
+[2019-09-21 17:51:06] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":155,"identifier":"r_155_20190822145053","customerId":39827,"orderId":118357,"cardId":99684,"transactionId":334571,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569077463}
+[2019-09-21 17:51:06] [RESPONSE]: Validating completed for cart ID: 155
+[2019-09-21 17:51:06] [RESPONSE]: Status complete-ok for cart ID: 155
+[2019-09-21 17:51:06] [RESPONSE-ERROR]: Cart #155 could not be loaded
+[2019-09-21 17:52:09] *** IPN RESPONSE START ***
+[2019-09-21 17:52:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334571,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569077463,"cardId":99684}
+[2019-09-21 17:52:09] [RESPONSE-ERROR]: Order already validated, transaction id 334571
+[2019-09-21 17:57:12] *** IPN RESPONSE START ***
+[2019-09-21 17:57:12] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334571,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569077463,"cardId":99684}
+[2019-09-21 17:57:12] [RESPONSE-ERROR]: Order already validated, transaction id 334571
+[2019-09-21 17:57:15] *** IPN RESPONSE START ***
+[2019-09-21 17:57:15] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334567,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569073863,"cardId":99483}
+[2019-09-21 17:57:15] [RESPONSE-ERROR]: Order already validated, transaction id 334567
+[2019-09-21 17:57:15] *** IPN RESPONSE START ***
+[2019-09-21 17:57:15] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118113,"externalOrderId":"148","transactionId":334368,"transactionMethod":"card","transactionKind":"card","customerId":39702,"identifier":"r_148_20190819135046","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568987463,"cardId":99483}
+[2019-09-21 17:57:15] [RESPONSE-ERROR]: Order already validated, transaction id 334368
+[2019-09-21 18:07:14] *** IPN RESPONSE START ***
+[2019-09-21 18:07:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334568,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569074462,"cardId":99484}
+[2019-09-21 18:07:14] [RESPONSE-ERROR]: Order already validated, transaction id 334568
+[2019-09-21 18:07:15] *** IPN RESPONSE START ***
+[2019-09-21 18:07:15] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118114,"externalOrderId":"149","transactionId":334370,"transactionMethod":"card","transactionKind":"card","customerId":39703,"identifier":"r_149_20190819140014","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568988063,"cardId":99484}
+[2019-09-21 18:07:15] [RESPONSE-ERROR]: Order already validated, transaction id 334370
+[2019-09-21 18:11:05] *** IPN RESPONSE START ***
+[2019-09-21 18:11:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334573,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569078663,"cardId":99488}
+[2019-09-21 18:11:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":151,"identifier":"r_151_20190819151036","customerId":39706,"orderId":118118,"cardId":99488,"transactionId":334573,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569078663}
+[2019-09-21 18:11:05] [RESPONSE]: Validating completed for cart ID: 151
+[2019-09-21 18:11:05] [RESPONSE]: Status complete-ok for cart ID: 151
+[2019-09-21 18:11:05] [RESPONSE-ERROR]: Cart #151 could not be loaded
+[2019-09-21 18:12:07] *** IPN RESPONSE START ***
+[2019-09-21 18:12:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334573,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569078663,"cardId":99488}
+[2019-09-21 18:12:07] [RESPONSE-ERROR]: Order already validated, transaction id 334573
+[2019-09-21 18:17:10] *** IPN RESPONSE START ***
+[2019-09-21 18:17:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334573,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569078663,"cardId":99488}
+[2019-09-21 18:17:10] [RESPONSE-ERROR]: Order already validated, transaction id 334573
+[2019-09-21 18:34:13] *** IPN RESPONSE START ***
+[2019-09-21 18:34:13] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334569,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569076082,"cardId":99486}
+[2019-09-21 18:34:13] [RESPONSE-ERROR]: Order already validated, transaction id 334569
+[2019-09-21 18:34:14] *** IPN RESPONSE START ***
+[2019-09-21 18:34:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118116,"externalOrderId":"150","transactionId":334375,"transactionMethod":"card","transactionKind":"card","customerId":39704,"identifier":"r_150_20190819142748","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568989683,"cardId":99486}
+[2019-09-21 18:34:14] [RESPONSE-ERROR]: Order already validated, transaction id 334375
+[2019-09-21 18:57:14] *** IPN RESPONSE START ***
+[2019-09-21 18:57:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334377,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568991062,"cardId":99684}
+[2019-09-21 18:57:14] [RESPONSE-ERROR]: Order already validated, transaction id 334377
+[2019-09-21 18:57:14] *** IPN RESPONSE START ***
+[2019-09-21 18:57:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118357,"externalOrderId":"155","transactionId":334571,"transactionMethod":"card","transactionKind":"card","customerId":39827,"identifier":"r_155_20190822145053","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569077463,"cardId":99684}
+[2019-09-21 18:57:14] [RESPONSE-ERROR]: Order already validated, transaction id 334571
+[2019-09-21 19:17:13] *** IPN RESPONSE START ***
+[2019-09-21 19:17:13] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334573,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569078663,"cardId":99488}
+[2019-09-21 19:17:13] [RESPONSE-ERROR]: Order already validated, transaction id 334573
+[2019-09-21 19:17:15] *** IPN RESPONSE START ***
+[2019-09-21 19:17:15] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118118,"externalOrderId":"151","transactionId":334386,"transactionMethod":"card","transactionKind":"card","customerId":39706,"identifier":"r_151_20190819151036","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1568992263,"cardId":99488}
+[2019-09-21 19:17:15] [RESPONSE-ERROR]: Order already validated, transaction id 334386
+[2019-09-22 15:05:06] *** IPN RESPONSE START ***
+[2019-09-22 15:05:06] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334725,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569153903,"cardId":99550}
+[2019-09-22 15:05:06] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":152,"identifier":"r_152_20190820120438","customerId":39754,"orderId":118199,"cardId":99550,"transactionId":334725,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569153903}
+[2019-09-22 15:05:06] [RESPONSE]: Validating completed for cart ID: 152
+[2019-09-22 15:05:06] [RESPONSE]: Status complete-ok for cart ID: 152
+[2019-09-22 15:05:06] [RESPONSE-ERROR]: Cart #152 could not be loaded
+[2019-09-22 15:06:09] *** IPN RESPONSE START ***
+[2019-09-22 15:06:09] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334725,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569153903,"cardId":99550}
+[2019-09-22 15:06:09] [RESPONSE-ERROR]: Order already validated, transaction id 334725
+[2019-09-22 15:11:11] *** IPN RESPONSE START ***
+[2019-09-22 15:11:11] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334725,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569153903,"cardId":99550}
+[2019-09-22 15:11:11] [RESPONSE-ERROR]: Order already validated, transaction id 334725
+[2019-09-22 16:11:14] *** IPN RESPONSE START ***
+[2019-09-22 16:11:14] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334725,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569153903,"cardId":99550}
+[2019-09-22 16:11:14] [RESPONSE-ERROR]: Order already validated, transaction id 334725
+[2019-09-22 16:11:16] *** IPN RESPONSE START ***
+[2019-09-22 16:11:16] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118199,"externalOrderId":"152","transactionId":334557,"transactionMethod":"card","transactionKind":"card","customerId":39754,"identifier":"r_152_20190820120438","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569067502,"cardId":99550}
+[2019-09-22 16:11:16] [RESPONSE-ERROR]: Order already validated, transaction id 334557
+[2019-09-22 16:27:05] *** IPN RESPONSE START ***
+[2019-09-22 16:27:05] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334737,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569158822,"cardId":99481}
+[2019-09-22 16:27:05] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":147,"identifier":"r_147_20190819132630","customerId":39700,"orderId":118111,"cardId":99481,"transactionId":334737,"transactionKind":"card","amount":6,"currency":"USD","timestamp":1569158822}
+[2019-09-22 16:27:05] [RESPONSE]: Validating completed for cart ID: 147
+[2019-09-22 16:27:05] [RESPONSE]: Status complete-ok for cart ID: 147
+[2019-09-22 16:27:05] [RESPONSE-ERROR]: Cart #147 could not be loaded
+[2019-09-22 16:28:07] *** IPN RESPONSE START ***
+[2019-09-22 16:28:07] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334737,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569158822,"cardId":99481}
+[2019-09-22 16:28:07] [RESPONSE-ERROR]: Order already validated, transaction id 334737
+[2019-09-22 16:33:10] *** IPN RESPONSE START ***
+[2019-09-22 16:33:10] [RESPONSE]: Decrypted string: {"status":"complete-ok","transactionStatus":"complete-ok","orderId":118111,"externalOrderId":"147","transactionId":334737,"transactionMethod":"card","transactionKind":"card","customerId":39700,"identifier":"r_147_20190819132630","amount":6,"currency":"USD","custom":null,"customField":null,"externalCustomData":null,"timestamp":1569158822,"cardId":99481}
+[2019-09-22 16:33:10] [RESPONSE-ERROR]: Order already validated, transaction id 334737
+[2019-09-23 15:23:38] *** BACKURL RESPONSE START ***
+[2019-09-23 15:23:38] [RESPONSE]: Decrypted string: {"code":201,"message":"Created","status":"complete-ok","transactionStatus":"complete-ok","orderId":"121481","externalOrderId":"40","transactionId":"334911","transactionMethod":"card","transactionKind":"card","customerId":"41224","identifier":"_3_20190923152325","amount":"5.00","currency":"RON","custom":[],"customField":[],"timestamp":1569241416,"cardId":"101575"}
+[2019-09-23 15:23:38] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":40,"identifier":"_3_20190923152325","customerId":41224,"orderId":121481,"cardId":101575,"transactionId":334911,"transactionKind":"card","amount":5,"currency":"RON","timestamp":1569241416}
+[2019-09-23 15:23:38] [RESPONSE]: Validating completed for cart ID: 40
+[2019-09-23 15:23:38] [RESPONSE]: Status complete-ok for cart ID: 40
+[2019-09-23 15:23:46] [RESPONSE]: Order created.
+[2019-09-23 18:31:49] *** BACKURL RESPONSE START ***
+[2019-09-23 18:31:49] [RESPONSE]: Decrypted string: {"code":201,"message":"Created","status":"complete-ok","transactionStatus":"complete-ok","orderId":"121493","externalOrderId":"41","transactionId":"334930","transactionMethod":"card","transactionKind":"card","customerId":"41226","identifier":"_3_20190923182811","amount":"5.00","currency":"RON","custom":[],"customField":[],"timestamp":1569252705,"cardId":"101579"}
+[2019-09-23 18:31:49] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":41,"identifier":"_3_20190923182811","customerId":41226,"orderId":121493,"cardId":101579,"transactionId":334930,"transactionKind":"card","amount":5,"currency":"RON","timestamp":1569252705}
+[2019-09-23 18:31:49] [RESPONSE]: Validating completed for cart ID: 41
+[2019-09-23 18:31:49] [RESPONSE]: Status complete-ok for cart ID: 41
+[2019-09-23 18:31:56] [RESPONSE]: Order created.
+[2019-09-23 18:32:35] *** BACKURL RESPONSE START ***
+[2019-09-23 18:32:35] [RESPONSE-ERROR]: Order already validated, order id 40
+[2019-09-25 09:45:31] *** BACKURL RESPONSE START ***
+[2019-09-25 09:45:31] [RESPONSE]: Decrypted string: {"code":201,"message":"Created","status":"complete-ok","transactionStatus":"complete-ok","orderId":"121746","externalOrderId":"42","transactionId":"335241","transactionMethod":"card","transactionKind":"card","customerId":"41327","identifier":"_3_20190925094515","amount":"5.00","currency":"RON","custom":[],"customField":[],"timestamp":1569393928,"cardId":"101707"}
+[2019-09-25 09:45:31] [RESPONSE]: Data: %s{"status":"complete-ok","id_cart":42,"identifier":"_3_20190925094515","customerId":41327,"orderId":121746,"cardId":101707,"transactionId":335241,"transactionKind":"card","amount":5,"currency":"RON","timestamp":1569393928}
+[2019-09-25 09:45:31] [RESPONSE]: Validating completed for cart ID: 42
+[2019-09-25 09:45:31] [RESPONSE]: Status complete-ok for cart ID: 42
+[2019-09-25 09:45:38] [RESPONSE]: Order created.

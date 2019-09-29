@@ -14,14 +14,7 @@
 
 {if $action && $inputs}
   <form accept-charset="UTF-8" id="twispay_payment_form" action="{$action|escape:'quotes'}" method="POST">
-    {foreach from=$inputs item=value key=name}
-      {if !is_array($value)}
-        <input type="hidden" name="{$name|escape:'htmlall':'UTF-8'}" value="{$value|escape:'htmlall':'UTF-8'}" />
-      {else}
-        {foreach from=$value item=subvalue key=subname}
-          <input type="hidden" name="{$name|escape:'htmlall':'UTF-8'}[{$subname|escape:'htmlall':'UTF-8'}]" value="{$subvalue|escape:'htmlall':'UTF-8'}" />
-        {/foreach}
-      {/if}
-    {/foreach}
+    <input type="hidden" name="jsonRequest" value="{$inputs['jsonRequest']|escape:'htmlall':'UTF-8'}" />
+    <input type="hidden" name="checksum" value="{$inputs['checksum']|escape:'htmlall':'UTF-8'}" />
   </form>
 {/if}

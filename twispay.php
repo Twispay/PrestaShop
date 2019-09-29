@@ -15,14 +15,27 @@
 
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
+require _PS_MODULE_DIR_.'twispay/classes/Twispay_Encoder.php';
+require _PS_MODULE_DIR_.'twispay/classes/Twispay_Logger.php';
+require _PS_MODULE_DIR_.'twispay/classes/Twispay_Response.php';
+require _PS_MODULE_DIR_.'twispay/classes/Twispay_Status_Updater.php';
+require _PS_MODULE_DIR_.'twispay/classes/Twispay_Transactions.php';
+
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
 
 class Twispay extends PaymentModule
 {
+    /**
+    *
+    *
+    * Create Module
+    *
+    *
+    */
     protected $config_form = false;
-
     public function __construct()
     {
         $this->name = 'twispay';
@@ -39,21 +52,19 @@ class Twispay extends PaymentModule
         $this->description = $this->l('Module for Twispay payment gateway. Your customers can now pay with credit card.');
     }
 
-    /**
-     * Don't forget to create update methods if needed:
-     * http://doc.prestashop.com/display/PS16/Enabling+the+Auto-Update
-     */
     public function install()
     {
         Configuration::updateValue('TWISPAY_LIVE_MODE', false);
 
         return parent::install() &&
-            $this->createTransactionsTable() &&
+            Twispay_Transactions::createTransactionsTable() &&
             $this->registerHook('displayHeader') &&
             $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHook('displayPaymentReturn') &&
             $this->registerHook('paymentOptions') &&
-            $this->registerHook('displayAdminOrderLeft');
+            $this->registerHook('displayAdminOrderLeft') &&
+            $this->registerHook('actionOrderStatusUpdate');
+
     }
 
     public function uninstall()
@@ -64,14 +75,10 @@ class Twispay extends PaymentModule
         return parent::uninstall();
     }
 
-    /**
-     * Load the configuration form
-     */
+    /**  Load the configuration form. */
     public function getContent()
     {
-        /**
-         * If values have been submitted in the form, process.
-         */
+        /** If values have been submitted in the form, process.*/
         $messages = "";
         if (((bool)Tools::isSubmit('submitTwispayModule')) == true) {
             $post = $this->postProcess();
@@ -85,15 +92,64 @@ class Twispay extends PaymentModule
         }
 
         $this->context->smarty->assign('module_dir', $this->_path);
-        
+
         $output = $this->renderTransactionsList();
 
         return $messages.$this->renderForm().$output;
     }
 
     /**
-     * Create the form that will be displayed in the configuration of your module.
-     */
+    *
+    *
+    * Read configuration
+    *
+    *
+    */
+    /** Method for gettings keys info (siteId and privateKey) */
+    public static function getKeysInfo()
+    {
+        if (Configuration::get('TWISPAY_LIVE_MODE')) {
+            $info = array(
+                'liveMode' => Configuration::get('TWISPAY_LIVE_MODE'),
+                'privateKey' => Configuration::get('TWISPAY_PRIVATEKEY_LIVE'),
+                'siteId' => Configuration::get('TWISPAY_SITEID_LIVE'),
+                'formUrl' => 'https://secure.twispay.com',
+            );
+        } else {
+            $info = array(
+                'liveMode' => Configuration::get('TWISPAY_LIVE_MODE'),
+                'privateKey' => Configuration::get('TWISPAY_PRIVATEKEY_STAGING'),
+                'siteId' => Configuration::get('TWISPAY_SITEID_STAGING'),
+                'formUrl' => 'https://secure-stage.twispay.com',
+            );
+        }
+        if (!$info['privateKey'] || !$info['siteId']) {
+            return false;
+        }
+        return $info;
+    }
+
+    /** Set values for the inputs.*/
+    protected function getConfigFormValues()
+    {
+        return array(
+            'TWISPAY_LIVE_MODE' => Configuration::get('TWISPAY_LIVE_MODE'),
+            'TWISPAY_SITEID_STAGING' => Configuration::get('TWISPAY_SITEID_STAGING'),
+            'TWISPAY_PRIVATEKEY_STAGING' => Configuration::get('TWISPAY_PRIVATEKEY_STAGING'),
+            'TWISPAY_SITEID_LIVE' => Configuration::get('TWISPAY_SITEID_LIVE'),
+            'TWISPAY_PRIVATEKEY_LIVE' => Configuration::get('TWISPAY_PRIVATEKEY_LIVE'),
+            'TWISPAY_NOTIFICATION_URL' => $this->context->link->getModuleLink('twispay', 'validation'),
+        );
+    }
+
+    /**
+    *
+    *
+    * Create Admin pannel interface
+    *
+    *
+    */
+    /** Create the form that will be displayed in the configuration of your module.*/
     protected function renderForm()
     {
         $helper = new HelperForm();
@@ -119,9 +175,7 @@ class Twispay extends PaymentModule
         return $helper->generateForm(array($this->getConfigForm()));
     }
 
-    /**
-     * Create the structure of your form.
-     */
+    /** Create the structure of your form.*/
     protected function getConfigForm()
     {
         return array(
@@ -199,29 +253,12 @@ class Twispay extends PaymentModule
         );
     }
 
-    /**
-     * Set values for the inputs.
-     */
-    protected function getConfigFormValues()
-    {
-        return array(
-            'TWISPAY_LIVE_MODE' => Configuration::get('TWISPAY_LIVE_MODE'),
-            'TWISPAY_SITEID_STAGING' => Configuration::get('TWISPAY_SITEID_STAGING'),
-            'TWISPAY_PRIVATEKEY_STAGING' => Configuration::get('TWISPAY_PRIVATEKEY_STAGING'),
-            'TWISPAY_SITEID_LIVE' => Configuration::get('TWISPAY_SITEID_LIVE'),
-            'TWISPAY_PRIVATEKEY_LIVE' => Configuration::get('TWISPAY_PRIVATEKEY_LIVE'),
-            'TWISPAY_NOTIFICATION_URL' => $this->context->link->getModuleLink('twispay', 'validation'),
-        );
-    }
-
-    /**
-     * Save form data.
-     */
+    /** Save form data.*/
     protected function postProcess()
     {
         $form_values = $this->getConfigFormValues();
         $success = true;
-        
+
         foreach (array_keys($form_values) as $key) {
             if (!Configuration::updateValue($key, Tools::getValue($key))) {
                 $success = false;
@@ -230,344 +267,7 @@ class Twispay extends PaymentModule
         return $success;
     }
 
-    /**
-    * Add the CSS & JavaScript files you want to be loaded in the BO.
-    */
-    public function hookDisplayBackOfficeHeader()
-    {
-        if (Tools::getValue('module_name') == $this->name || Tools::getValue('configure') == $this->name) {
-            $this->context->controller->addJquery();
-            Media::addJsDef(array(
-                'TWISPAY_LIVE_MODE' => Configuration::get('TWISPAY_LIVE_MODE'),
-            ));
-            $this->context->controller->addJS($this->_path.'views/js/back.js');
-            $this->context->controller->addCSS($this->_path.'views/css/back.css');
-        }
-    }
-    
-    public function hookPaymentOptions($params)
-    {
-        if (!$this->active || !self::getKeysInfo()) {
-            return;
-        }
-
-        $this->smarty->assign(
-            $this->getPaymentVars($params)
-        );
-        
-        $this->smarty->assign(array(
-            'logos_folder' => _PS_BASE_URL_SSL_.__PS_BASE_URI__.'modules/'.$this->name.'/views/img/',
-        ));
-        
-        $newOption = new PaymentOption();
-        $newOption->setModuleName($this->name)
-                ->setCallToActionText($this->trans('Pay by credit or debit card', array(), 'Modules.Twispay.Shop'))
-                ->setForm($this->fetch('module:twispay/views/templates/hook/twispay_payment_form.tpl'))
-                ->setAdditionalInformation($this->fetch('module:twispay/views/templates/hook/twispay_payment_extra.tpl'));
-        $payment_options = array(
-            $newOption,
-        );
-
-        return $payment_options;
-    }
-    
-    public function hookDisplayAdminOrderLeft($params)
-    {
-        $id_order = (int)$params['id_order'];
-        $data = Db::getInstance()->getRow('SELECT * FROM `'._DB_PREFIX_.'twispay_transactions` 
-        WHERE `id_cart` = (SELECT `id_cart` FROM `'._DB_PREFIX_.'orders` WHERE `id_order` = "'.$id_order.'")');
-        if (!$data) {
-            return false;
-        } else {
-            return $this->buildOrderMessage($data);
-        }
-    }
-    
-    public function hookDisplayHeader($params)
-    {
-        $this->context->controller->addCSS($this->_path.'views/css/front.css');
-    }
-
-    public function hookDisplayPaymentReturn($params)
-    {
-        if (Tools::version_compare(_PS_VERSION_, '1.7', '>')) {
-            return false;
-        }
-        if ($this->active == false) {
-            return;
-        }
-        $order = $params['objOrder'];
-
-        if ($order->getCurrentOrderState()->id != Configuration::get('PS_OS_ERROR')) {
-            $this->smarty->assign('status', 'ok');
-        }
-        $this->smarty->assign(array(
-            'id_order' => $order->id,
-            'reference' => $order->reference,
-            'params' => $params,
-            'total' => Tools::displayPrice($params['total_to_pay'], $params['currencyObj'], false),
-        ));
-
-        return $this->display(__FILE__, 'views/templates/hook/confirmation.tpl');
-    }
-    
-    /* Method for sorting an array recursive ** Needed for data encoding ** */
-    
-    public static function recursiveKeySort(array &$data)
-    {
-        ksort($data, SORT_STRING);
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                self::recursiveKeySort($data[$key]);
-            }
-        }
-    }
-    
-    /* Method for gettings keys info (siteId and privateKey) */
-    
-    public static function getKeysInfo()
-    {
-        if (Configuration::get('TWISPAY_LIVE_MODE')) {
-            $info = array(
-                'privateKey' => Configuration::get('TWISPAY_PRIVATEKEY_LIVE'),
-                'siteId' => Configuration::get('TWISPAY_SITEID_LIVE'),
-                'formUrl' => 'https://secure.twispay.com',
-            );
-        } else {
-            $info = array(
-                'privateKey' => Configuration::get('TWISPAY_PRIVATEKEY_STAGING'),
-                'siteId' => Configuration::get('TWISPAY_SITEID_STAGING'),
-                'formUrl' => 'https://secure-stage.twispay.com',
-            );
-        }
-        if (!$info['privateKey'] || !$info['siteId']) {
-            return false;
-        }
-        return $info;
-    }
-    
-    /* Method for adding siteId, apiKey and checksum to the data arraay */
-    
-    public static function buildDataArray($data)
-    {
-        $keys = self::getKeysInfo();
-        if (!$keys) {
-            return false;
-        }
-        $apiKey = $keys['privateKey'];
-        $siteId = $keys['siteId'];
-        $data['siteId'] = $siteId;
-        
-        unset($data['checksum']);
-        self::recursiveKeySort($data);
-        $query = http_build_query($data);
-        
-        $encoded = hash_hmac('sha512', $query, $apiKey, true);
-        $data['checksum'] = base64_encode($encoded);
-        
-        return $data;
-    }
-    
-    /* Method for decrypting data received by Twispay */
-    
-    public static function twispayDecrypt($encrypted)
-    {
-        $keys = self::getKeysInfo();
-        if (!$keys) {
-            return false;
-        }
-        $apiKey = $keys['privateKey'];
-        
-        $encrypted = (string)$encrypted;
-        if (!Tools::strlen($encrypted)) {
-            return null;
-        }
-        if (strpos($encrypted, ',') !== false) {
-            $encryptedParts = explode(',', $encrypted, 2);
-            $iv = base64_decode($encryptedParts[0]);
-            if (false === $iv) {
-                throw new Exception("Invalid encryption iv");
-            }
-            $encrypted = base64_decode($encryptedParts[1]);
-            if (false === $encrypted) {
-                throw new Exception("Invalid encrypted data");
-            }
-            $decrypted = openssl_decrypt($encrypted, 'aes-256-cbc', $apiKey, OPENSSL_RAW_DATA, $iv);
-            if (false === $decrypted) {
-                throw new Exception("Data could not be decrypted");
-            }
-            return $decrypted;
-        }
-        return null;
-    }
-    
-    public function getPaymentVars($params = false)
-    {
-        $inputs = array();
-        if (!$params) {
-            $params = array();
-            $params['cookie'] = $this->context->cookie;
-            $params['cart'] = $this->context->cart;
-        }
-        
-        /* Customer data */
-        
-        $inputs['identifier'] = '_'.$params['cart']->id_customer;
-        $customerObj = new Customer((int)$params['cart']->id_customer);
-        if (Validate::isLoadedObject($customerObj)) {
-            $inputs['firstName'] = $customerObj->firstname;
-            $inputs['lastName'] = $customerObj->lastname;
-            $inputs['customerTags'] = array(0 => "");
-            $inputs['invoiceEmail'] = "";
-        }
-        
-        /* Customer address data */
-        $id_address = (int)$params['cart']->id_address_invoice;
-        if ($id_address) {
-            $addressObj = new Address($id_address);
-            if (Validate::isLoadedObject($addressObj)) {
-                $countryObj = new Country($addressObj->id_country);
-                if (Validate::isLoadedObject($countryObj)) {
-                    $inputs['country'] = $countryObj->iso_code;
-                    if ((int)$addressObj->id_state && $inputs['country'] == 'US') {
-                        $state = new State($addressObj->id_state);
-                        if (Validate::isLoadedObject($state)) {
-                            $inputs['state'] = $state->iso_code;
-                        }
-                    }
-                }
-                $inputs['city'] = $addressObj->city;
-                $inputs['zipCode'] = $addressObj->postcode;
-                $inputs['address'] = $addressObj->address1;
-                if ($addressObj->address2) {
-                    $inputs['address'] .= " ".$addressObj->address2;
-                }
-                if ($addressObj->phone_mobile) {
-                    $inputs['phone'] = $addressObj->phone_mobile;
-                } elseif ($addressObj->phone) {
-                    $inputs['phone'] = $addressObj->phone;
-                }
-                $inputs['email'] = $customerObj->email;
-            }
-        }
-        
-        /* Transaction details data */
-        $cart = $params['cart'];
-        $inputs['cardTransactionMode'] = $this->getCardTransactionMode($cart);
-        $inputs['amount'] = (float)number_format((float)$cart->getOrderTotal(true, Cart::BOTH), 2, '.', '');
-        $currency = new Currency((int)$cart->id_currency);
-        $inputs['currency'] = $currency->iso_code;
-        $inputs['orderType'] = $this->getOrderType($params);
-        $inputs['orderId'] = self::buildOrderId($cart->id);
-        $inputs['cardId'] = $this->getPreviousCardId($params);
-        $inputs['description'] = $this->getCartDescription($cart);
-        $inputs['backUrl'] = $this->getBackUrl($cart);
-        $inputs['orderTags'] = array(0 => "");
-        
-        /* Order details data */
-        $products = $cart->getProducts();
-        $products_i = 0;
-        foreach ($products as $product) {
-            $inputs['item'][$products_i] = $product['name'];
-            $inputs['unitPrice'][$products_i] = number_format((float)$product['price_wt'], 2);
-            $inputs['units'][$products_i] = (float)$product['cart_quantity'];
-            $inputs['subTotal'][$products_i] = number_format(number_format((float)$inputs['unitPrice'][$products_i], 2)
-                * number_format((float)$inputs['units'][$products_i], 2), 2);
-            if (!empty($product['attributes_small'])) {
-                $inputs['item'][$products_i] .= " - ".$product['attributes_small'];
-            } elseif (!empty($product['attributes'])) {
-                $inputs['item'][$products_i] .= " - ".$product['attributes'];
-            }
-            
-            $products_i++;
-        }
-        $shipping = (float)number_format((float)$cart->getOrderTotal(true, Cart::ONLY_SHIPPING), 2);
-        if ($shipping > 0) {
-            $inputs['item'][$products_i] = $this->l('Shipping');
-            $inputs['unitPrice'][$products_i] = $shipping;
-            $inputs['units'][$products_i] = 1;
-            $inputs['subTotal'][$products_i] = $shipping;
-        }
-        $discounts = (float)number_format((float)$cart->getOrderTotal(true, Cart::ONLY_DISCOUNTS), 2);
-        if ($discounts > 0) {
-            $inputs['item'][$products_i] = $this->l('Discounts');
-            $inputs['unitPrice'][$products_i] = -$discounts;
-            $inputs['units'][$products_i] = 1;
-            $inputs['subTotal'][$products_i] = -$discounts;
-        }
-        
-        $inputs = self::buildDataArray($inputs);
-        
-        $data = array();
-        
-        $data['inputs'] = $inputs;
-        $data['action'] = self::getPaymentFormActionUrl();
-        
-        return $data;
-    }
-    
-    public function getOrderType($params)
-    {
-        return 'purchase';
-    }
-    
-    public function getPreviousCardId($params)
-    {
-        return 0;
-    }
-    
-    public static function getPaymentFormActionUrl()
-    {
-        $keys = self::getKeysInfo();
-        if ($keys) {
-            return $keys['formUrl'];
-        }
-        return false;
-    }
-    
-    public function getCardTransactionMode($cart)
-    {
-        return "authAndCapture";
-    }
-    
-    public function getCartDescription($cart)
-    {
-        return "";
-    }
-    
-    public function getBackUrl($cart)
-    {
-        $id_customer = (int)$cart->id_customer;
-        $secure_key = "";
-        if ($id_customer) {
-            $customer = new Customer($id_customer);
-            if (Validate::isLoadedObject($customer)) {
-                $secure_key = $customer->secure_key;
-            }
-        }
-        return $this->context->link->getModuleLink(
-            'twispay',
-            'confirmation',
-            array('cart_id' => $cart->id, 'secure_key' => $secure_key)
-        );
-    }
-    
-    public function log($string = false)
-    {
-        $log_file = dirname(__FILE__).'/twispay_log.txt';
-        if (!$string) {
-            $string = PHP_EOL.PHP_EOL;
-        } else {
-            $string = "[".date('Y-m-d H:i:s')."] ".$string;
-        }
-        @file_put_contents($log_file, $string.PHP_EOL, FILE_APPEND);
-    }
-    
-    public static function getResultStatuses()
-    {
-        return array("complete-ok");
-    }
-    
+    /** Define the fields of Transactions List */
     public function renderTransactionsList()
     {
         $this->fields_list = array(
@@ -613,18 +313,14 @@ class Twispay extends PaymentModule
             ),
         );
         $helper = new HelperList();
-         
         $helper->shopLinkType = '';
-         
         $helper->simple_header = true;
-         
-        // Actions to be displayed in the "Actions" column
-         
+        /** Actions to be displayed in the "Actions" column */
         $helper->identifier = 'id_transaction';
         $helper->show_toolbar = true;
         $helper->title = 'Transactions list';
         $helper->table = 'twispay_transactions';
-        $helper->listTotal = $this->getTransactionsNumber();
+        $helper->listTotal = Twispay_Transactions::getTransactionsNumber();
         $helper->_default_pagination = 20;
         $helper->simple_header = false;
         $page = (int)Tools::getValue('submitFilter'.$helper->table);
@@ -633,255 +329,305 @@ class Twispay extends PaymentModule
             isset($this->context->cookie->{$helper->table.'_pagination'}) ? $this->context->cookie->{$helper->table.
             '_pagination'} : $helper->_default_pagination
         );
-         
+
         $helper->token = Tools::getAdminTokenLite('AdminModules');
         $helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
-        return $helper->generateList($this->getTransactions($page, $selected_pagination), $this->fields_list);
+        return $helper->generateList(Twispay_Transactions::getTransactions($page, $selected_pagination), $this->fields_list);
     }
-    
-    public function logTransaction($data)
+    /**
+      * Add the CSS & JavaScript files you want to be loaded in the BO.
+      * Display custom persistent errors
+    */
+    public function hookDisplayBackOfficeHeader()
     {
-        $columns = array(
-            'status',
-            'id_cart',
-            'identifier',
-            'customerId',
-            'orderId',
-            'cardId',
-            'transactionId',
-            'transactionKind',
-            'amount',
-            'currency',
-            'timestamp',
-        );
-        foreach (array_keys($data) as $key) {
-            if (!in_array($key, $columns)) {
-                unset($data[$key]);
-            } else {
-                $data[$key] = pSQL($data[$key]);
-            }
+        if (Tools::getValue('module_name') == $this->name || Tools::getValue('configure') == $this->name) {
+            $this->context->controller->addJquery();
+            Media::addJsDef(array(
+                'TWISPAY_LIVE_MODE' => Configuration::get('TWISPAY_LIVE_MODE'),
+            ));
+            $this->context->controller->addJS($this->_path.'views/js/back.js');
+            $this->context->controller->addCSS($this->_path.'views/css/back.css');
         }
-        if (!empty($data['timestamp'])) {
-            $data['date'] = pSQL(date('Y-m-d H:i:s', $data['timestamp']));
-            unset($data['timestamp']);
+        if($this->context->cookie->redirect_error){
+          //Display persistent error
+          $this->context->controller->errors[] = $this->context->cookie->redirect_error;
+          //Clean persistent error
+          unset($this->context->cookie->redirect_error);
         }
-        if (!empty($data['identifier'])) {
-            $data['identifier'] = (int)str_replace('_', '', $data['identifier']);
-        }
-        Db::getInstance()->insert('twispay_transactions', $data);
     }
-    
-    public function createTransactionsTable()
+
+    /** Display last order information on Admin > Orders > Order */
+    public function hookDisplayAdminOrderLeft($params)
     {
-        $sql = "
-        CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_."twispay_transactions` (
-            `id_transaction` int(11) NOT NULL AUTO_INCREMENT,
-            `status` varchar(16) NOT NULL,
-            `id_cart` int(11) NOT NULL,
-            `identifier` int(11) NOT NULL,
-            `customerId` int(11) NOT NULL,
-            `orderId` int(11) NOT NULL,
-            `cardId` int(11) NOT NULL,
-            `transactionId` int(11) NOT NULL,
-            `transactionKind` varchar(16) NOT NULL,
-            `amount` float NOT NULL,
-            `currency` varchar(8) NOT NULL,
-            `date` DATETIME NOT NULL,
-            PRIMARY KEY (`id_transaction`)
-        ) ENGINE="._MYSQL_ENGINE_." DEFAULT CHARSET=utf8;";
-        return Db::getInstance()->execute($sql);
-    }
-    
-    public function getTransactions($page, $selected_pagination)
-    {
-        if ((int)$page <= 0) {
-            $page = 1;
+        $id_order = (int)$params['id_order'];
+        $data = Db::getInstance()->getRow('SELECT * FROM `'._DB_PREFIX_.'twispay_transactions`
+        WHERE `id_cart` = (SELECT `id_cart` FROM `'._DB_PREFIX_.'orders` WHERE `id_order` = "'.$id_order.'") ORDER BY `date` DESC');
+        if (!$data) {
+            return false;
+        } else {
+            return $this->buildOrderMessage($data);
         }
-        $limit = ((int)$page-1)*$selected_pagination;
-        return Db::getInstance()->executeS('SELECT tt.*, o.`reference` 
-        as `order_reference`, CONCAT(tt.`amount`, " ", tt.`currency`) 
-        as `amount_formatted`, CONCAT(c.`firstname`," ", c.`lastname`) 
-        as `customer_name`  FROM `'._DB_PREFIX_.'twispay_transactions` tt 
-        LEFT JOIN `'._DB_PREFIX_.'orders` o LEFT JOIN `'._DB_PREFIX_.'customer` c 
-        ON (c.`id_customer` = o.`id_customer`) ON (o.`id_cart` = tt.`id_cart`) 
-        ORDER BY `id_transaction` DESC LIMIT '. (int)$limit .', '.(int)$selected_pagination);
     }
-    
-    public function getTransactionsNumber()
-    {
-        return (int)Db::getInstance()->getValue('SELECT COUNT(*) FROM `'._DB_PREFIX_.'twispay_transactions`');
-    }
-    
+
     public function buildOrderMessage($data)
     {
         $this->context->smarty->assign('data', $data);
         return $this->display(__FILE__, 'views/templates/admin/payment_message.tpl');
     }
-    
-    public function getPath()
+
+     /**
+     *
+     *
+     * Create Front interface
+     *
+     *
+     */
+    /** Hook for order status update action */
+    public function hookActionOrderStatusUpdate($params)
     {
-        return dirname(__FILE__);
-    }
-    
-    public function checkValidation($decrypted, $usingOpenssl = true)
-    {
-        $json = Tools::jsonDecode($decrypted);
-        if (!$json) {
-            return false;
-        }
-        $this->log('[RESPONSE] decrypted string ('.(int)$usingOpenssl.'): '.$decrypted);
-        /* Validating the fields */
-        if (empty($json->externalOrderId)) {
-            $this->_errors[] = $this->l('Empty externalOrderId');
-        } else {
-            $order_id = Order::getOrderByCartId(self::getOrderIdFromString($json->externalOrderId));
-            if ($order_id) {
-                $this->log(sprintf($this->l('[RESPONSE-ERROR] Order already validated, order id %s'), $order_id));
-                $this->log();
-                return true;
-            }
-        }
-        $id_cart = (!empty($json->externalOrderId)) ? self::getOrderIdFromString($json->externalOrderId) : 0;
-        $cart = new Cart($id_cart);
-        $cartFound = false;
-        if (Validate::isLoadedObject($cart)) {
-            $cartFound = true;
-        }
-        if (empty($json->status) && empty($json->transactionStatus)) {
-            $this->_errors[] = $this->l('Empty status');
-        }
-        if (empty($json->amount)) {
-            if ($cartFound) {
-                $json->amount = (float)number_format((float)$cart->getOrderTotal(true, Cart::BOTH), 2, '.', '');
-            } else {
-                $this->_errors[] = $this->l('Empty amount');
-            }
-        }
-        if (empty($json->currency)) {
-            if ($cartFound) {
-                $currency = new Currency($cart->id_currency);
-                if (Validate::isLoadedObject($currency)) {
-                    $json->currency = $currency->iso_code;
-                } else {
-                    $this->_errors[] = $this->l('Empty currency');
+        $status = $params['newOrderStatus']?$params['newOrderStatus']->id:false;
+
+        /** If refund status id */
+        if ($status == 7) {
+            //If transaction is registred in twispay transactions list
+            $transaction = Twispay_Transactions::getTransactionByCartId($params['cart']->id);
+            if ($transaction) {
+                if($transaction['status'] == Twispay_Status_Updater::$RESULT_STATUSES['REFUND_OK']){
+                  Twispay_Logger::api_log($this->l('Order already refunded.'));
+                  $this->context->cookie->redirect_error = $this->l('Order already refunded.');
+                }else{
+                  $keys = self::getKeysInfo();
+                  if (!$keys) {
+                    $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$this->l('Invalid API Keys.');
+                    //Redirect to order page
+                    Tools::redirect($_SERVER['HTTP_REFERER']);
+                    die();
+                  }
+                  $refund = Twispay_Transactions::refundTransaction($transaction, $keys);
+                  if ($refund['refunded']) {
+                      Twispay_Logger::api_log($this->l('Successfully refunded ').json_encode($refund));
+                  } else {
+                      Twispay_Logger::api_log($this->l('Twispay refund error: ').json_encode($refund));
+                      $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$refund['status'];
+                      //Redirect to order page
+                      Tools::redirect($_SERVER['HTTP_REFERER']);
+                      die();
+                  }
                 }
-            } else {
-                $this->_errors[] = $this->l('Empty currency');
+            }else{
+              Twispay_Logger::api_log($this->l('Twispay refund error: ').$this->l('Order transaction not found.'));
+              $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$this->l('No transactions were found for this order.');
+              //Redirect to order page
+              Tools::redirect($_SERVER['HTTP_REFERER']);
+              die();
             }
-        }
-        if (empty($json->identifier)) {
-            $this->_errors[] = $this->l('Empty identifier');
-        }
-        if (empty($json->orderId)) {
-            $this->_errors[] = $this->l('Empty orderId');
-        }
-        if (empty($json->transactionId)) {
-            $this->_errors[] = $this->l('Empty transactionId');
-        }
-        /*if(empty($json->transactionKind) && empty($json->transactionMethod)) {
-            $this->_errors[] = $this->l('Empty transactionKind');
-        }*/
-        if (sizeof($this->_errors)) {
-            foreach ($this->_errors as $err) {
-                $this->log('[RESPONSE-ERROR] '.$err);
-            }
-            $this->log();
-            return false;
-        } else {
-            $data = array(
-                'id_cart' => $id_cart,
-                'status' => (empty($json->status)) ? $json->transactionStatus : $json->status,
-                'amount' => (float)$json->amount,
-                'currency' => $json->currency,
-                'identifier' => $json->identifier,
-                'orderId' => (int)$json->orderId,
-                'transactionId' => (empty($json->transactionId)) ? 0 : (int)$json->transactionId,
-                'customerId' => (int)$json->customerId,
-                'transactionKind' => self::getTransactionKind($json),
-                'cardId' => (!empty($json->cardId)) ? (int)$json->cardId : 0,
-                'timestamp' => (is_object($json->timestamp)) ? time() : $json->timestamp,
-            );
-            $this->log('[RESPONSE] Data: '.Tools::jsonEncode($data));
-            
-            $id_cart = $data['id_cart'];
-            $cart = new Cart($id_cart);
-            if (!Validate::isLoadedObject($cart)) {
-                $this->log(sprintf($this->l('[RESPONSE-ERROR] Cart #%s could not be loaded'), $id_cart));
-                $this->log();
-                return false;
-            }
-            $id_customer = (int)$cart->id_customer;
-            $customer = new Customer($id_customer);
-            if (!Validate::isLoadedObject($customer)) {
-                $this->log(sprintf($this->l('[RESPONSE-ERROR] Customer #%s could not be loaded.'), $id_customer));
-                $this->log();
-                return false;
-            }
-            $secure_key = $customer->secure_key;
-            
-            $id_currency = (int)Currency::getIdByIsoCode($data['currency']);
-            if (!$id_currency) {
-                $this->log(sprintf($this->l('[RESPONSE-ERROR] Wrong Currency: %s'), $data['currency']));
-                $this->log();
-                return false;
-            }
-            if (!in_array($data['status'], $this->getResultStatuses())) {
-                $this->log(sprintf($this->l('[RESPONSE-ERROR] Wrong status (%s)'), $data['status']));
-                $this->log();
-                $this->logTransaction($data);
-                return false;
-            }
-            $this->log('[RESPONSE] Status complete-ok');
-            
-            $validated = $this->validateOrder(
-                $data['id_cart'],
-                Configuration::get('PS_OS_PAYMENT'),
-                $data['amount'],
-                $this->displayName,
-                null,
-                null,
-                $id_currency,
-                false,
-                $secure_key
-            );
-            if ($validated) {
-                $this->logTransaction($data);
-                $this->log(sprintf($this->l('[RESPONSE] Validating order: %s'), Tools::jsonEncode($validated)));
-                $this->log();
-            } else {
-                $this->log(
-                    sprintf($this->l('[RESPONSE-ERROR] Could not validate order: %s'), Tools::jsonEncode($validated))
-                );
-                $this->log();
-            }
-            return $validated;
         }
     }
-    
-    public static function buildOrderId($id_cart)
+
+    /** Add Twispay payment option on checkout */
+    public function hookPaymentOptions($params)
+    {
+        if (!$this->active || !self::getKeysInfo()) {
+            return;
+        }
+
+        $this->smarty->assign(
+            $this->getPaymentVars($params)
+        );
+
+        $this->smarty->assign(array(
+            'logos_folder' => _PS_BASE_URL_SSL_.__PS_BASE_URI__.'modules/'.$this->name.'/views/img/',
+        ));
+
+        $newOption = new PaymentOption();
+        $newOption->setModuleName($this->name)
+                ->setCallToActionText($this->trans('Pay by credit or debit card', array(), 'Modules.Twispay.Shop'))
+                ->setForm($this->fetch('module:twispay/views/templates/hook/twispay_payment_form.tpl'))
+                ->setAdditionalInformation($this->fetch('module:twispay/views/templates/hook/twispay_payment_extra.tpl'));
+        $payment_options = array(
+            $newOption,
+        );
+
+        return $payment_options;
+    }
+
+    /** Include files in front header */
+    public function hookDisplayHeader($params)
+    {
+        $this->context->controller->addCSS($this->_path.'views/css/front.css');
+    }
+
+    /** Display order info in confirmation page */
+    public function hookDisplayPaymentReturn($params)
+    {
+        if (Tools::version_compare(_PS_VERSION_, '1.7', '>')) {
+            return false;
+        }
+        if ($this->active == false) {
+            return;
+        }
+        $order = $params['objOrder'];
+
+        if ($order->getCurrentOrderState()->id != Configuration::get('PS_OS_ERROR')) {
+            $this->smarty->assign('status', 'ok');
+        }
+        $this->smarty->assign(array(
+            'id_order' => $order->id,
+            'reference' => $order->reference,
+            'params' => $params,
+            'total' => Tools::displayPrice($params['total_to_pay'], $params['currencyObj'], false),
+        ));
+
+        return $this->display(__FILE__, 'views/templates/hook/confirmation.tpl');
+    }
+
+    /**
+    *
+    *
+    * Build POST message
+    *
+    *
+    */
+    public function getPaymentVars($params = false)
+    {
+        if (!$params) {
+            $params = array();
+            $params['cookie'] = $this->context->cookie;
+            $params['cart'] = $this->context->cart;
+        }
+
+        /* Customer data */
+        $customer_inputs = array();
+        $customer_inputs['identifier'] = '_'.$params['cart']->id_customer.'_'.date('YmdHis');
+        $customerObj = new Customer((int)$params['cart']->id_customer);
+        if (Validate::isLoadedObject($customerObj)) {
+            $customer_inputs['firstName'] = $customerObj->firstname;
+            $customer_inputs['lastName'] = $customerObj->lastname;
+        }
+
+        /* Customer address data */
+        $id_address = (int)$params['cart']->id_address_invoice;
+        if ($id_address) {
+            $addressObj = new Address($id_address);
+            if (Validate::isLoadedObject($addressObj)) {
+                $countryObj = new Country($addressObj->id_country);
+                if (Validate::isLoadedObject($countryObj)) {
+                    $customer_inputs['country'] = $countryObj->iso_code;
+                    if ((int)$addressObj->id_state && $inputs['country'] == 'US') {
+                        $state = new State($addressObj->id_state);
+                        if (Validate::isLoadedObject($state)) {
+                            $customer_inputs['state'] = $state->iso_code;
+                        }
+                    }
+                }
+                $customer_inputs['city'] = $addressObj->city;
+                $customer_inputs['zipCode'] = $addressObj->postcode;
+                $customer_inputs['address'] = $addressObj->address1;
+                if ($addressObj->address2) {
+                    $customer_inputs['address'] .= " ".$addressObj->address2;
+                }
+                if ($addressObj->phone_mobile) {
+                    $customer_inputs['phone'] = $addressObj->phone_mobile;
+                } elseif ($addressObj->phone) {
+                    $customer_inputs['phone'] = $addressObj->phone;
+                }
+                $customer_inputs['email'] = $customerObj->email;
+            }
+        }
+
+        /* Items details data */
+        $cart = $params['cart'];
+        $products = $cart->getProducts();
+        $items = array();
+        foreach ($products as $product) {
+            $items[] = ['item' => $product['name']
+                   , 'units' =>  (float)$product['cart_quantity']
+                   , 'unitPrice' => number_format((float)$product['price_wt'], 2)
+                   ];
+        }
+
+        /* Order details data */
+        $order_inputs = array();
+        $order_inputs['orderId'] = $this->buildOrderId($cart->id);
+        $order_inputs['type'] = $this->getOrderType($params);
+        $order_inputs['amount'] = (float)number_format((float)$cart->getOrderTotal(true, Cart::BOTH), 2, '.', '');
+        $currency = new Currency((int)$cart->id_currency);
+        $order_inputs['currency'] = $currency->iso_code;
+        $order_inputs['items'] = $items;
+
+        /* Transaction details data */
+        $inputs = array();
+        $inputs['customer'] = $customer_inputs;
+        $inputs['order'] = $order_inputs;
+        $inputs['cardTransactionMode'] = $this->getCardTransactionMode($cart);
+        $inputs['invoiceEmail'] = "";
+        $inputs['backUrl'] = $this->getBackUrl($cart);
+        $inputs = $this->buildDataArray($inputs);
+
+        $data = array();
+        $data['inputs'] = $inputs;
+        $data['action'] = $this->getPaymentFormActionUrl();
+
+        return $data;
+    }
+
+    /* Method for adding siteId, apiKey and checksum to the data arraay */
+    public function buildDataArray($data)
+    {
+        $keys = self::getKeysInfo();
+        if (!$keys) {
+            return false;
+        }
+        $apiKey = $keys['privateKey'];
+        $data['siteId'] = $keys['siteId'];
+
+        $checksum = Twispay_Encoder::getBase64Checksum($data, $apiKey);
+        $jsonRequest = Twispay_Encoder::getBase64JsonRequest($data);
+
+        $data['checksum'] = $checksum;
+        $data['jsonRequest'] = $jsonRequest;
+
+        return $data;
+    }
+
+    public function getOrderType($params)
+    {
+        return 'purchase';
+    }
+
+    public function getCardTransactionMode($cart)
+    {
+        return "authAndCapture";
+    }
+
+    public function getPaymentFormActionUrl()
+    {
+        $keys = self::getKeysInfo();
+        if ($keys) {
+            return $keys['formUrl'];
+        }
+        return false;
+    }
+
+    public function getBackUrl($cart)
+    {
+        $id_customer = (int)$cart->id_customer;
+        $secure_key = "";
+        if ($id_customer) {
+            $customer = new Customer($id_customer);
+            if (Validate::isLoadedObject($customer)) {
+                $secure_key = $customer->secure_key;
+            }
+        }
+        return $this->context->link->getModuleLink(
+            'twispay',
+            'confirmation',
+            array('cart_id' => $cart->id, 'secure_key' => $secure_key)
+        );
+    }
+
+    public function buildOrderId($id_cart)
     {
         return $id_cart.'_'.time();
-    }
-    
-    public static function getOrderIdFromString($string)
-    {
-        if (strpos($string, '_') !== -1) {
-            $array = explode('_', $string);
-            return (int)$array[0];
-        } else {
-            return (int)$string;
-        }
-    }
-    
-    public static function getTransactionKind($json)
-    {
-        $kind = 'n/a';
-        if (!empty($json->transactionKind)) {
-            $kind = $json->transactionKind;
-        }
-        if (!empty($json->transactionMethod)) {
-            $kind = $json->transactionMethod;
-        }
-        return $kind;
     }
 }

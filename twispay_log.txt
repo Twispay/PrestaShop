@@ -1,0 +1,7 @@
+[2019-09-06 20:49:24] [RESPONSE] decrypted string (0): {"code":201,"message":"Created","status":"complete-ok","transactionStatus":"complete-ok","orderId":"119464","externalOrderId":"7_1567782399","transactionId":"329803","transactionMethod":"card","transactionKind":"card","customerId":"38399","identifier":"_3","amount":"5.00","currency":"RON","custom":[],"customField":[],"timestamp":1567792161,"cardId":"100416"}
+[2019-09-06 20:49:24] [RESPONSE] Data: {"id_cart":7,"status":"complete-ok","amount":5,"currency":"RON","identifier":"_3","orderId":119464,"transactionId":329803,"customerId":38399,"transactionKind":"card","cardId":100416,"timestamp":1567792161}
+[2019-09-06 20:49:24] [RESPONSE] Status complete-ok
+[2019-09-06 20:49:26] [RESPONSE] Validating order: true
+
+
+
