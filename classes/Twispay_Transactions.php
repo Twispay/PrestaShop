@@ -72,7 +72,7 @@ if (! class_exists('Twispay_Transactions')) :
                 unset($data['timestamp']);
             }
             if (!empty($data['identifier'])) {
-                $data['identifier'] = (int)str_replace('_', '', $data['identifier']);
+                $data['identifier'] = explode("_", $data['identifier'])[1];
             }
             Db::getInstance()->insert('twispay_transactions', $data);
             return $data;
