@@ -8,7 +8,6 @@
  * @version  1.0.1
  */
 
-
 /* Security class check */
 if (! class_exists('Twispay_Response')) :
     /**
@@ -30,31 +29,31 @@ if (! class_exists('Twispay_Response')) :
         {
             $encrypted = ( string )$tw_encryptedMessage;
 
-            if (!strlen($encrypted) || (FALSE == strpos($encrypted, ','))) {
-                return FALSE;
+            if (!strlen($encrypted) || (false == strpos($encrypted, ','))) {
+                return false;
             }
 
             /* Get the IV and the encrypted data */
             $encryptedParts = explode(/*delimiter*/',', $encrypted, /*limit*/2);
             $iv = base64_decode($encryptedParts[0]);
-            if (FALSE === $iv) {
-                return FALSE;
+            if (false === $iv) {
+                return false;
             }
 
             $encryptedData = base64_decode($encryptedParts[1]);
-            if (FALSE === $encryptedData) {
-                return FALSE;
+            if (false === $encryptedData) {
+                return false;
             }
 
             /* Decrypt the encrypted data */
             $decryptedResponse = openssl_decrypt($encryptedData, /*method*/'aes-256-cbc', $tw_secretKey, /*options*/OPENSSL_RAW_DATA, $iv);
 
-            if (FALSE === $decryptedResponse) {
-                return FALSE;
+            if (false === $decryptedResponse) {
+                return false;
             }
 
             /* JSON decode the decrypted data. */
-            $decryptedResponse = json_decode($decryptedResponse, /*assoc*/TRUE, /*depth*/4);
+            $decryptedResponse = json_decode($decryptedResponse, /*assoc*/true, /*depth*/4);
 
             /* Normalize values */
             $decryptedResponse['status'] = (empty($decryptedResponse['status'])) ? ($decryptedResponse['transactionStatus']) : ($decryptedResponse['status']);
@@ -79,7 +78,7 @@ if (! class_exists('Twispay_Response')) :
             $tw_errors = array();
 
             if (!$tw_response) {
-                return FALSE;
+                return false;
             }
 
             if (empty($tw_response['status']) && empty($tw_response['transactionStatus'])) {
@@ -130,7 +129,7 @@ if (! class_exists('Twispay_Response')) :
                 foreach ($tw_errors as $err) {
                     Twispay_Logger::log($err);
                 }
-                return FALSE;
+                return false;
             } else {
                 $data = [ 'status'          => $tw_response['status']
                         , 'id_cart'         => (int)$tw_response['externalOrderId']
@@ -149,10 +148,10 @@ if (! class_exists('Twispay_Response')) :
 
                 if (!in_array($data['status'], Twispay_Status_Updater::$RESULT_STATUSES)) {
                     Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Wrong status: ').$data['status']);
-                    return FALSE;
+                    return false;
                 }
                 Twispay_Logger::log($translator->trans('[RESPONSE]: Validating completed for cart ID: ').$data['id_cart']);
-                return TRUE;
+                return true;
             }
         }
     }

@@ -23,7 +23,7 @@ if (! class_exists('Twispay_Logger')) :
          *
          * @return void
          */
-        public static function log($message = FALSE)
+        public static function log($message = false)
         {
             $log_file = dirname(__FILE__).'/../logs/transactions.log';
             /* Build the log message. */
@@ -39,7 +39,7 @@ if (! class_exists('Twispay_Logger')) :
          *
          * @return void
          */
-        public static function api_log($message = FALSE)
+        public static function api_log($message = false)
         {
             $log_file = dirname(__FILE__).'/../logs/requests.log';
             /* Build the log message. */

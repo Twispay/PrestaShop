@@ -1,17 +1,8 @@
 <?php
 /**
-* NOTICE OF LICENSE
-*
-* This file is licenced under the Software License Agreement.
-* With the purchase or the installation of the software in your application
-* you accept the licence agreement.
-*
-* You must not modify, adapt or create derivative works of this source code.
-*
-*  @author    Active Design <office@activedesign.ro>
-*  @copyright 2017 Active Design
-*  @license   LICENSE.txt
-*/
+ * @author   Twistpay
+ * @version  1.0.1
+ */
 
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
@@ -20,7 +11,6 @@ require _PS_MODULE_DIR_.'twispay/classes/Twispay_Logger.php';
 require _PS_MODULE_DIR_.'twispay/classes/Twispay_Response.php';
 require _PS_MODULE_DIR_.'twispay/classes/Twispay_Status_Updater.php';
 require _PS_MODULE_DIR_.'twispay/classes/Twispay_Transactions.php';
-
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -40,8 +30,8 @@ class Twispay extends PaymentModule
     {
         $this->name = 'twispay';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.0';
-        $this->author = 'Active Design';
+        $this->version = '1.0.1';
+        $this->author = 'Twispay';
         $this->need_instance = 0;
         $this->module_key = 'd89110977c71a97d064d510cc90d760c';
         $this->bootstrap = true;
@@ -64,7 +54,6 @@ class Twispay extends PaymentModule
             $this->registerHook('paymentOptions') &&
             $this->registerHook('displayAdminOrderLeft') &&
             $this->registerHook('actionOrderStatusUpdate');
-
     }
 
     public function uninstall()
@@ -239,7 +228,7 @@ class Twispay extends PaymentModule
                     array(
                         'col' => 3,
                         'type' => 'text',
-                        'prefix' => '<i class="icon icon-key"></i>',
+                        'prefix' => '<i class="icon icon-link"></i>',
                         'desc' => $this->l('Put this URL in your twispay account'),
                         'name' => 'TWISPAY_NOTIFICATION_URL',
                         'label' => $this->l('Server-to-server notification URL'),
@@ -348,11 +337,11 @@ class Twispay extends PaymentModule
             $this->context->controller->addJS($this->_path.'views/js/back.js');
             $this->context->controller->addCSS($this->_path.'views/css/back.css');
         }
-        if($this->context->cookie->redirect_error){
-          //Display persistent error
-          $this->context->controller->errors[] = $this->context->cookie->redirect_error;
-          //Clean persistent error
-          unset($this->context->cookie->redirect_error);
+        if ($this->context->cookie->redirect_error) {
+            /** Display persistent error */
+            $this->context->controller->errors[] = $this->context->cookie->redirect_error;
+            /** Clean persistent error */
+            unset($this->context->cookie->redirect_error);
         }
     }
 
@@ -375,13 +364,13 @@ class Twispay extends PaymentModule
         return $this->display(__FILE__, 'views/templates/admin/payment_message.tpl');
     }
 
-     /**
-     *
-     *
-     * Create Front interface
-     *
-     *
-     */
+    /**
+    *
+    *
+    * Create Front interface
+    *
+    *
+    */
     /** Hook for order status update action */
     public function hookActionOrderStatusUpdate($params)
     {
@@ -389,37 +378,37 @@ class Twispay extends PaymentModule
 
         /** If refund status id */
         if ($status == 7) {
-            //If transaction is registred in twispay transactions list
+            /** If transaction is registred in twispay transactions list */
             $transaction = Twispay_Transactions::getTransactionByCartId($params['cart']->id);
             if ($transaction) {
-                if($transaction['status'] == Twispay_Status_Updater::$RESULT_STATUSES['REFUND_OK']){
-                  Twispay_Logger::api_log($this->l('Order already refunded.'));
-                  $this->context->cookie->redirect_error = $this->l('Order already refunded.');
-                }else{
-                  $keys = self::getKeysInfo();
-                  if (!$keys) {
-                    $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$this->l('Invalid API Keys.');
-                    //Redirect to order page
-                    Tools::redirect($_SERVER['HTTP_REFERER']);
-                    die();
-                  }
-                  $refund = Twispay_Transactions::refundTransaction($transaction, $keys);
-                  if ($refund['refunded']) {
-                      Twispay_Logger::api_log($this->l('Successfully refunded ').json_encode($refund));
-                  } else {
-                      Twispay_Logger::api_log($this->l('Twispay refund error: ').json_encode($refund));
-                      $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$refund['status'];
-                      //Redirect to order page
-                      Tools::redirect($_SERVER['HTTP_REFERER']);
-                      die();
-                  }
+                if ($transaction['status'] == Twispay_Status_Updater::$RESULT_STATUSES['REFUND_OK']) {
+                    Twispay_Logger::api_log($this->l('Order already refunded.'));
+                    $this->context->cookie->redirect_error = $this->l('Order already refunded.');
+                } else {
+                    $keys = self::getKeysInfo();
+                    if (!$keys) {
+                        $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$this->l('Invalid API Keys.');
+                        /** Redirect to order page */
+                        /** Skip the part when the status is set */
+                        Tools::redirect($_SERVER['HTTP_REFERER']);
+                        die();
+                    }
+                    $refund = Twispay_Transactions::refundTransaction($transaction, $keys);
+                    if ($refund['refunded']) {
+                        Twispay_Logger::api_log($this->l('Successfully refunded ').json_encode($refund));
+                    } else {
+                        Twispay_Logger::api_log($this->l('Twispay refund error: ').json_encode($refund));
+                        $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$refund['status'];
+                        /** Redirect to order page */
+                        /** Skip the part when the status is set */
+                        Tools::redirect($_SERVER['HTTP_REFERER']);
+                        die();
+                    }
                 }
-            }else{
-              Twispay_Logger::api_log($this->l('Twispay refund error: ').$this->l('Order transaction not found.'));
-              $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$this->l('No transactions were found for this order.');
-              //Redirect to order page
-              Tools::redirect($_SERVER['HTTP_REFERER']);
-              die();
+                /** If the order was not payed via twispay */
+            } else {
+                Twispay_Logger::api_log($this->l('Twispay refund error: ').$this->l('Order transaction not found.'));
+                $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$this->l('No transactions were found for this order.');
             }
         }
     }
@@ -531,6 +520,7 @@ class Twispay extends PaymentModule
                 } elseif ($addressObj->phone) {
                     $customer_inputs['phone'] = $addressObj->phone;
                 }
+                $customer_inputs['phone'] = ((strlen($customer_inputs['phone']) && $customer_inputs['phone'][0] == '+') ? ('+') : ('')) . preg_replace('/([^0-9]*)+/', '', $customer_inputs['phone']);
                 $customer_inputs['email'] = $customerObj->email;
             }
         }

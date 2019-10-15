@@ -1,24 +1,13 @@
 <?php
 /**
-* NOTICE OF LICENSE
-*
-* This file is licenced under the Software License Agreement.
-* With the purchase or the installation of the software in your application
-* you accept the licence agreement.
-*
-* You must not modify, adapt or create derivative works of this source code.
-*
-*  @author    Active Design <office@activedesign.ro>
-*  @copyright 2017 Active Design
-*  @license   LICENSE.txt
-*/
+ * @author   Twistpay
+ * @version  1.0.1
+ */
 
 class TwispayConfirmationModuleFrontController extends ModuleFrontController
 {
     public function postProcess()
     {
-        // DEBUG
-        Twispay_Logger::log($this->l('*** BACKURL RESPONSE START ***'));
         /* Check if the POST is corrupted: Doesn't contain the 'opensslResult' and the 'result' fields. */
         /* OR */
         /* Check if the POST is corrupted: Doesn't contain the 'secure_key' field. */
@@ -37,7 +26,7 @@ class TwispayConfirmationModuleFrontController extends ModuleFrontController
             return $this->showNotice();
         }
         $apiKey = $keys['privateKey'];
-        $secure_key = Tools::getValue('secure_key');
+        $this->secure_key = Tools::getValue('secure_key');
 
         /** Check if cart is valid */
         $cart_id = Tools::getValue('cart_id');
@@ -55,19 +44,18 @@ class TwispayConfirmationModuleFrontController extends ModuleFrontController
         }
 
         /** Check if the secure key is valid */
-        if ($secure_key != $customer->secure_key) {
+        if ($this->secure_key != $customer->secure_key) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Secure key is not valid.'));
             return $this->showNotice();
         }
 
         $order_id = Order::getOrderByCartId((int)$cart->id);
-        if ($order_id && ($secure_key == $customer->secure_key)) {
+        if ($order_id && ($this->secure_key == $customer->secure_key)) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Order already validated, order id '). $order_id);
             /**
              * The order has already been placed so we redirect the customer on the confirmation page.
              */
-            Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart_id.'&id_module=' .$module_id.'&id_order='.$order_id.'&key='.$secure_key);
-            // die("OK");
+            Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart_id.'&id_module=' .$module_id.'&id_order='.$order_id.'&key='.$this->secure_key);
         }
 
         /* Extract the server response and decript it. */
@@ -84,8 +72,7 @@ class TwispayConfirmationModuleFrontController extends ModuleFrontController
         /** Check if transaction already exist */
         if (Twispay_Transactions::checkTransaction($decrypted['transactionId'])) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Order already validated, transaction id '). $decrypted['transactionId']);
-            Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart_id.'&id_module='.$module_id.'&id_order='.$order_id.'&key='.$secure_key);
-            // die("OK");
+            Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart_id.'&id_module='.$module_id.'&id_order='.$order_id.'&key='.$this->secure_key);
         }
 
         /* Validate the decripted response. */

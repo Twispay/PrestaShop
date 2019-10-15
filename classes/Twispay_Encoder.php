@@ -39,7 +39,7 @@ if (! class_exists('Twispay_Encoder')) :
          */
         public static function getBase64Checksum(array $orderData, $secretKey)
         {
-            $hmacSha512 = hash_hmac(/*algo*/'sha512', Tools::jsonEncode($orderData), $secretKey, /*raw_output*/TRUE);
+            $hmacSha512 = hash_hmac(/*algo*/'sha512', Tools::jsonEncode($orderData), $secretKey, /*raw_output*/true);
             return base64_encode($hmacSha512);
         }
     }
