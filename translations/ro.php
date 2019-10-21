@@ -3,7 +3,7 @@
 global $_MODULE;
 $_MODULE = array();
 $_MODULE['<{twispay}prestashop>twispay_973af7e80ca208a7f00ca7fc7d65105f'] = 'Plateste in siguranta cu cardul | Twispay';
-$_MODULE['<{twispay}prestashop>twispay_64114cf4e2f35b15d264f5ce07a9f715'] = 'Modul pentru portalul de plati Twispay. Clienții dvs. pot acum plati cu cardul de credit.';
+$_MODULE['<{twispay}prestashop>twispay_64114cf4e2f35b15d264f5ce07a9f715'] = 'Modul pentru portalul de plati Twispay. Clientii dvs. pot acum plati cu cardul de credit.';
 $_MODULE['<{twispay}prestashop>twispay_0d4ee96f32f52eab5fb83ca33c5985da'] = 'Setarile au fost salvate.';
 $_MODULE['<{twispay}prestashop>twispay_3d5d3e2e8e87468c2b91b5b3329be86d'] = 'A aparut o eroare';
 $_MODULE['<{twispay}prestashop>twispay_8c32a0718bda95fbacbe3388a6a87a5d'] = 'Setari Twispay';
@@ -30,7 +30,7 @@ $_MODULE['<{twispay}prestashop>twispay_addfd1581efdebf42a732dce5d154511'] = 'Tip
 $_MODULE['<{twispay}prestashop>twispay_b2f40690858b404ed10e62bdf422c704'] = 'Cont';
 $_MODULE['<{twispay}prestashop>twispay_ec53a8c4f07baed5d8825072c89799be'] = 'Status';
 $_MODULE['<{twispay}prestashop>twispay_44749712dbec183e983dcd78a7736c41'] = 'Data';
-$_MODULE['<{twispay}prestashop>twispay_cdd3fd828736cbe302dc8bc930ae402c'] = 'Lista tranzacii';
+$_MODULE['<{twispay}prestashop>twispay_cdd3fd828736cbe302dc8bc930ae402c'] = 'Lista tranzactii';
 $_MODULE['<{twispay}prestashop>twispay_106eee2cf0167c49bb469ed534943881'] = 'Comanda a fost deja rambursata.';
 $_MODULE['<{twispay}prestashop>twispay_6f9b183c1a494a9fe6404b308aa0c091'] = 'Eroare de rambursare Twispay:';
 $_MODULE['<{twispay}prestashop>twispay_b51516bf55aa4c9df316805673b8fc1f'] = 'Cheie API invalida.';
