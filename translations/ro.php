@@ -3,7 +3,7 @@
 global $_MODULE;
 $_MODULE = array();
 $_MODULE['<{twispay}prestashop>twispay_973af7e80ca208a7f00ca7fc7d65105f'] = 'Plateste in siguranta cu cardul | Twispay';
-$_MODULE['<{twispay}prestashop>twispay_64114cf4e2f35b15d264f5ce07a9f715'] = 'Modul pentru portalul de plati Twispay. Clientii dvs. pot acum plati cu cardul de credit.';
+$_MODULE['<{twispay}prestashop>twispay_64114cf4e2f35b15d264f5ce07a9f715'] = 'Modul pentru portalul de plati Twispay. Clientii dumneavoastra pot acum plati cu cardul de credit.';
 $_MODULE['<{twispay}prestashop>twispay_0d4ee96f32f52eab5fb83ca33c5985da'] = 'Setarile au fost salvate.';
 $_MODULE['<{twispay}prestashop>twispay_3d5d3e2e8e87468c2b91b5b3329be86d'] = 'A aparut o eroare';
 $_MODULE['<{twispay}prestashop>twispay_8c32a0718bda95fbacbe3388a6a87a5d'] = 'Setari Twispay';
