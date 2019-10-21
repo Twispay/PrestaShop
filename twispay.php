@@ -1,6 +1,6 @@
 <?php
 /**
- * @author   Twistpay
+ * @author   Twispay
  * @version  1.0.1
  */
 
@@ -18,16 +18,13 @@ if (!defined('_PS_VERSION_')) {
 
 class Twispay extends PaymentModule
 {
-    /**
-    *
-    *
-    * Create Module
-    *
-    *
-    */
     protected $config_form = false;
+    /**
+    * Create Module
+    */
     public function __construct()
     {
+        /** Initialize module members */
         $this->name = 'twispay';
         $this->tab = 'payments_gateways';
         $this->version = '1.0.1';
@@ -64,7 +61,7 @@ class Twispay extends PaymentModule
         return parent::uninstall();
     }
 
-    /**  Load the configuration form. */
+    /**  Load the admin configuration page. */
     public function getContent()
     {
         /** If values have been submitted in the form, process.*/
@@ -82,17 +79,14 @@ class Twispay extends PaymentModule
 
         $this->context->smarty->assign('module_dir', $this->_path);
 
+        /** Load the transaction list */
         $output = $this->renderTransactionsList();
-
+        /** Load the configuration form */
         return $messages.$this->renderForm().$output;
     }
 
     /**
-    *
-    *
     * Read configuration
-    *
-    *
     */
     /** Method for gettings keys info (siteId and privateKey) */
     public static function getKeysInfo()
@@ -132,11 +126,7 @@ class Twispay extends PaymentModule
     }
 
     /**
-    *
-    *
     * Create Admin pannel interface
-    *
-    *
     */
     /** Create the form that will be displayed in the configuration of your module.*/
     protected function renderForm()
@@ -151,8 +141,7 @@ class Twispay extends PaymentModule
 
         $helper->identifier = $this->identifier;
         $helper->submit_action = 'submitTwispayModule';
-        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
-            .'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
 
         $helper->tpl_vars = array(
@@ -173,6 +162,7 @@ class Twispay extends PaymentModule
                 'title' => $this->l('Twispay settings'),
                 'icon' => 'icon-cogs',
                 ),
+                /** Form fields */
                 'input' => array(
                     array(
                         'type' => 'switch',
@@ -304,10 +294,11 @@ class Twispay extends PaymentModule
         $helper = new HelperList();
         $helper->shopLinkType = '';
         $helper->simple_header = true;
+
         /** Actions to be displayed in the "Actions" column */
         $helper->identifier = 'id_transaction';
         $helper->show_toolbar = true;
-        $helper->title = 'Transactions list';
+        $helper->title = $this->l('Transactions list');
         $helper->table = 'twispay_transactions';
         $helper->listTotal = Twispay_Transactions::getTransactionsNumber();
         $helper->_default_pagination = 20;
@@ -315,18 +306,18 @@ class Twispay extends PaymentModule
         $page = (int)Tools::getValue('submitFilter'.$helper->table);
         $selected_pagination = Tools::getValue(
             $helper->table.'_pagination',
-            isset($this->context->cookie->{$helper->table.'_pagination'}) ? $this->context->cookie->{$helper->table.
-            '_pagination'} : $helper->_default_pagination
+            isset($this->context->cookie->{$helper->table.'_pagination'}) ? $this->context->cookie->{$helper->table.'_pagination'} : $helper->_default_pagination
         );
 
         $helper->token = Tools::getAdminTokenLite('AdminModules');
         $helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
         return $helper->generateList(Twispay_Transactions::getTransactions($page, $selected_pagination), $this->fields_list);
     }
+
     /**
-      * Add the CSS & JavaScript files you want to be loaded in the BO.
-      * Display custom persistent errors
-    */
+     * Add the CSS & JavaScript files you want to be loaded in the BO.
+     * Display custom persistent errors
+     */
     public function hookDisplayBackOfficeHeader()
     {
         if (Tools::getValue('module_name') == $this->name || Tools::getValue('configure') == $this->name) {
@@ -354,10 +345,12 @@ class Twispay extends PaymentModule
         if (!$data) {
             return false;
         } else {
+            /** Link the info to query */
             return $this->buildOrderMessage($data);
         }
     }
 
+    /** Load template with assigned data */
     public function buildOrderMessage($data)
     {
         $this->context->smarty->assign('data', $data);
@@ -365,19 +358,14 @@ class Twispay extends PaymentModule
     }
 
     /**
-    *
-    *
     * Create Front interface
-    *
-    *
     */
     /** Hook for order status update action */
     public function hookActionOrderStatusUpdate($params)
     {
         $status = $params['newOrderStatus']?$params['newOrderStatus']->id:false;
 
-        /** If refund status id */
-        if ($status == 7) {
+        if ($status === 7/** Refund status id */) {
             /** If transaction is registred in twispay transactions list */
             $transaction = Twispay_Transactions::getTransactionByCartId($params['cart']->id);
             if ($transaction) {
@@ -407,7 +395,7 @@ class Twispay extends PaymentModule
                 }
                 /** If the order was not payed via twispay */
             } else {
-                Twispay_Logger::api_log($this->l('Twispay refund error: ').$this->l('Order transaction not found.'));
+                Twispay_Logger::api_log($this->l('Twispay refund error: ').$this->l('No transactions were found for order with id ').$params['id_order']);
                 $this->context->cookie->redirect_error = $this->l('Twispay refund error: ').$this->l('No transactions were found for this order.');
             }
         }
@@ -430,9 +418,9 @@ class Twispay extends PaymentModule
 
         $newOption = new PaymentOption();
         $newOption->setModuleName($this->name)
-                ->setCallToActionText($this->trans('Pay by credit or debit card', array(), 'Modules.Twispay.Shop'))
-                ->setForm($this->fetch('module:twispay/views/templates/hook/twispay_payment_form.tpl'))
-                ->setAdditionalInformation($this->fetch('module:twispay/views/templates/hook/twispay_payment_extra.tpl'));
+                  ->setCallToActionText($this->l('Pay by credit or debit card'))
+                  ->setForm($this->fetch('module:twispay/views/templates/hook/twispay_payment_form.tpl'))
+                  ->setAdditionalInformation($this->fetch('module:twispay/views/templates/hook/twispay_payment_extra.tpl'));
         $payment_options = array(
             $newOption,
         );
@@ -449,12 +437,10 @@ class Twispay extends PaymentModule
     /** Display order info in confirmation page */
     public function hookDisplayPaymentReturn($params)
     {
-        if (Tools::version_compare(_PS_VERSION_, '1.7', '>')) {
+        if (Tools::version_compare(_PS_VERSION_, '1.7', '>') || $this->active == false) {
             return false;
         }
-        if ($this->active == false) {
-            return;
-        }
+
         $order = $params['objOrder'];
 
         if ($order->getCurrentOrderState()->id != Configuration::get('PS_OS_ERROR')) {
@@ -471,11 +457,7 @@ class Twispay extends PaymentModule
     }
 
     /**
-    *
-    *
     * Build POST message
-    *
-    *
     */
     public function getPaymentVars($params = false)
     {
@@ -494,14 +476,18 @@ class Twispay extends PaymentModule
             $customer_inputs['lastName'] = $customerObj->lastname;
         }
 
-        /* Customer address data */
+        /** Customer address data */
         $id_address = (int)$params['cart']->id_address_invoice;
         if ($id_address) {
             $addressObj = new Address($id_address);
+            /** Check if address is valid */
             if (Validate::isLoadedObject($addressObj)) {
+                /** Check if country is valid */
                 $countryObj = new Country($addressObj->id_country);
                 if (Validate::isLoadedObject($countryObj)) {
                     $customer_inputs['country'] = $countryObj->iso_code;
+                    /** Check if state is valid */
+                    /** Only for US */
                     if ((int)$addressObj->id_state && $inputs['country'] == 'US') {
                         $state = new State($addressObj->id_state);
                         if (Validate::isLoadedObject($state)) {
@@ -521,37 +507,41 @@ class Twispay extends PaymentModule
                     $customer_inputs['phone'] = $addressObj->phone;
                 }
                 $customer_inputs['phone'] = ((strlen($customer_inputs['phone']) && $customer_inputs['phone'][0] == '+') ? ('+') : ('')) . preg_replace('/([^0-9]*)+/', '', $customer_inputs['phone']);
+
                 $customer_inputs['email'] = $customerObj->email;
             }
         }
 
-        /* Items details data */
+        /** Items details data */
         $cart = $params['cart'];
         $products = $cart->getProducts();
         $items = array();
         foreach ($products as $product) {
             $items[] = ['item' => $product['name']
-                   , 'units' =>  (float)$product['cart_quantity']
-                   , 'unitPrice' => number_format((float)$product['price_wt'], 2)
-                   ];
+                       ,'units' =>  (int)$product['cart_quantity']
+                       ,'unitPrice' => number_format((float)$product['price_wt'], 2)
+                       ];
         }
 
-        /* Order details data */
+        /** Order details data */
         $order_inputs = array();
         $order_inputs['orderId'] = $this->buildOrderId($cart->id);
-        $order_inputs['type'] = $this->getOrderType($params);
+        $order_inputs['type'] = $this->getOrderType();
         $order_inputs['amount'] = (float)number_format((float)$cart->getOrderTotal(true, Cart::BOTH), 2, '.', '');
+
         $currency = new Currency((int)$cart->id_currency);
         $order_inputs['currency'] = $currency->iso_code;
+
         $order_inputs['items'] = $items;
 
-        /* Transaction details data */
+        /** Transaction details data */
         $inputs = array();
         $inputs['customer'] = $customer_inputs;
         $inputs['order'] = $order_inputs;
-        $inputs['cardTransactionMode'] = $this->getCardTransactionMode($cart);
+        $inputs['cardTransactionMode'] = $this->getCardTransactionMode();
         $inputs['invoiceEmail'] = "";
         $inputs['backUrl'] = $this->getBackUrl($cart);
+
         $inputs = $this->buildDataArray($inputs);
 
         $data = array();
@@ -561,7 +551,13 @@ class Twispay extends PaymentModule
         return $data;
     }
 
-    /* Method for adding siteId, apiKey and checksum to the data arraay */
+    /** Method for adding siteId, apiKey and checksum to the data array
+    *
+    * @param array([key => value]) data: The data array.
+    *
+    * @return array([key => value]) - The data array containing added values
+    *
+    */
     public function buildDataArray($data)
     {
         $keys = self::getKeysInfo();
@@ -580,16 +576,32 @@ class Twispay extends PaymentModule
         return $data;
     }
 
-    public function getOrderType($params)
+    /** Getter for order type
+    *
+    * @return string - Order type
+    *
+    */
+    public function getOrderType()
     {
         return 'purchase';
     }
 
-    public function getCardTransactionMode($cart)
+    /** Getter for transaction mode
+    *
+    * @return string - Transaction mode
+    *
+    */
+    public function getCardTransactionMode()
     {
         return "authAndCapture";
     }
 
+    /** Getter for action URL
+    *
+    * @return string - Action action URL
+    *         boolean(false) - If the module keys are not defined
+    *
+    */
     public function getPaymentFormActionUrl()
     {
         $keys = self::getKeysInfo();
@@ -599,6 +611,13 @@ class Twispay extends PaymentModule
         return false;
     }
 
+    /** Getter for back URL
+    *
+    * @param object $cart - The cart object
+    *
+    * @return string - The resulted back URL
+    *
+    */
     public function getBackUrl($cart)
     {
         $id_customer = (int)$cart->id_customer;
@@ -616,8 +635,15 @@ class Twispay extends PaymentModule
         );
     }
 
-    public function buildOrderId($id_cart)
+    /** Getter for order ID
+    *
+    * @param object $cart_id - The cart id
+    *
+    * @return string - The resulted order id
+    *
+    */
+    public function buildOrderId($cart_id)
     {
-        return $id_cart.'_'.time();
+        return $cart_id.'_'.time();
     }
 }

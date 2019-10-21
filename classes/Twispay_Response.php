@@ -4,7 +4,7 @@
  *
  * Decodes and validates notifications sent by the Twispay server.
  *
- * @author   Twistpay
+ * @author   Twispay
  * @version  1.0.1
  */
 
@@ -67,70 +67,78 @@ if (! class_exists('Twispay_Response')) :
          * Function that validates a decripted response.
          *
          * @param tw_response The server decripted and JSON decoded response
-         * @param translator Language object
+         * @param module Module instance
          *
          * @return bool(FALSE)     - If any error occurs
          *         bool(TRUE)      - If the validation is successful
          */
 
-        public static function twispay_checkValidation($tw_response, $translator)
+        public static function twispay_checkValidation($tw_response, $module)
         {
             $tw_errors = array();
 
             if (!$tw_response) {
                 return false;
             }
-
+            /** Check if transaction status exists */
             if (empty($tw_response['status']) && empty($tw_response['transactionStatus'])) {
-                $tw_errors[] = $translator->trans('[RESPONSE-ERROR]: Empty status.');
+                $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty status.');
             }
-
+            /** Check if identifier exists */
             if (empty($tw_response['identifier'])) {
-                $tw_errors[] = $translator->trans('[RESPONSE-ERROR]: Empty identifier.');
+                $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty identifier.');
             }
-
+            /** Check if external order id exists */
             if (empty($tw_response['externalOrderId'])) {
-                $tw_errors[] = $translator->trans('[RESPONSE-ERROR]: Empty externalOrderId.');
+                $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty externalOrderId.');
             }
-
+            /** Check if transaction id exists */
             if (empty($tw_response['transactionId'])) {
-                $tw_errors[] = $translator->trans('[RESPONSE-ERROR]: Empty transactionId.');
+                $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty transactionId.');
             }
-
+            /** Check if external order id is a definex prestashop cart id */
             $id_cart = (!empty($tw_response['externalOrderId'])) ? explode('_', $tw_response['externalOrderId'])[0] : 0;
             $cart = new Cart($id_cart);
             $cartFound = false;
             if (Validate::isLoadedObject($cart)) {
                 $cartFound = true;
             }
-
+            /** Check if amout exists and format and cast it in a proper format if yes */
             if (empty($tw_response['amount'])) {
                 if ($cartFound) {
                     $tw_response['amount'] = (float)number_format((float)$cart->getOrderTotal(true, Cart::BOTH), 2, '.', '');
                 } else {
-                    $tw_errors[] = $translator->trans('[RESPONSE-ERROR]: Empty amount');
+                    $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty amount');
                 }
             }
-
+            /** Check if currency exists and format and assign its ISO code if yes */
             if (empty($tw_response['currency'])) {
                 if ($cartFound) {
                     $currency = new Currency($cart->id_currency);
                     if (Validate::isLoadedObject($currency)) {
                         $tw_response['currency'] = $currency->iso_code;
                     } else {
-                        $tw_errors[] = $translator->trans('[RESPONSE-ERROR]: Empty currency');
+                        $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty currency');
                     }
                 } else {
-                    $tw_errors[] = $translator->trans('[RESPONSE-ERROR]: Empty currency');
+                    $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty currency');
                 }
             }
 
+            /** Check if status is valid */
+            if (!in_array($tw_response['status'], Twispay_Status_Updater::$RESULT_STATUSES)) {
+                $tw_errors[] = $module->l('[RESPONSE-ERROR]: Wrong status: ').$tw_response['status'];
+            }
+
+            /** Check for error and log them all */
             if (sizeof($tw_errors)) {
                 foreach ($tw_errors as $err) {
                     Twispay_Logger::log($err);
                 }
                 return false;
+            /** If the response is valid */
             } else {
+                /** Prepare the data object related to transaction table format */
                 $data = [ 'status'          => $tw_response['status']
                         , 'id_cart'         => (int)$tw_response['externalOrderId']
                         , 'identifier'      => $tw_response['identifier']
@@ -142,15 +150,11 @@ if (! class_exists('Twispay_Response')) :
                         , 'amount'          => (float)$tw_response['amount']
                         , 'currency'        => $tw_response['currency']
                         , 'timestamp'       => $tw_response['timestamp']];
-
+                        
+                /** Insert the new transaction */
                 Twispay_Transactions::insertTransaction($data);
-                Twispay_Logger::log($translator->trans('[RESPONSE]: Data: %s').Tools::jsonEncode($data));
-
-                if (!in_array($data['status'], Twispay_Status_Updater::$RESULT_STATUSES)) {
-                    Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Wrong status: ').$data['status']);
-                    return false;
-                }
-                Twispay_Logger::log($translator->trans('[RESPONSE]: Validating completed for cart ID: ').$data['id_cart']);
+                Twispay_Logger::log($module->l('[RESPONSE]: Data: %s').Tools::jsonEncode($data));
+                Twispay_Logger::log($module->l('[RESPONSE]: Validating completed for cart ID: ').$data['id_cart']);
                 return true;
             }
         }

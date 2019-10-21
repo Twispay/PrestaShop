@@ -1,11 +1,14 @@
 <?php
 /**
- * @author   Twistpay
+ * Module Front Controller
+ *
+ * @author   Twispay
  * @version  1.0.1
  */
 
 class TwispayConfirmationModuleFrontController extends ModuleFrontController
 {
+    /** Method that provides mechanisms to process the BACKURL REQUESTS */
     public function postProcess()
     {
         /* Check if the POST is corrupted: Doesn't contain the 'opensslResult' and the 'result' fields. */
@@ -76,7 +79,7 @@ class TwispayConfirmationModuleFrontController extends ModuleFrontController
         }
 
         /* Validate the decripted response. */
-        $orderValidation = Twispay_Response::twispay_checkValidation($decrypted, $this->translator);
+        $orderValidation = Twispay_Response::twispay_checkValidation($decrypted, $this->module);
 
         /* Check if server response validation failed.  */
         if (true !== $orderValidation) {
@@ -85,7 +88,7 @@ class TwispayConfirmationModuleFrontController extends ModuleFrontController
         }
 
         /** Update the transaction status. */
-        Twispay_Status_Updater::updateStatus_backUrl($decrypted, $this->translator, $this);
+        Twispay_Status_Updater::updateStatus_backUrl($decrypted, $this);
     }
 
     public function showNotice()

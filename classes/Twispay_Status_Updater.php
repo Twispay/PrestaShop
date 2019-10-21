@@ -5,7 +5,7 @@
  * Updates the statused of orders and subscriptions based
  *  on the status read from the server response.
  *
- * @author   Twistpay
+ * @author   Twispay
  * @version  1.0.1
  */
 
@@ -31,48 +31,49 @@ if (! class_exists('Twispay_Status_Updater')) :
                                          , 'EXPIRING' => 'expiring' /* The recurring order has expired */
                                          , 'REFUND_REQUESTED' => 'refund-requested' /* The recurring order has expired */
                                          ];
+
         /**
          * Update the status of an order according to the received server status.
          *
          * @param object decrypted: Decrypted order message.
-         * @param object translator: Language object
          * @param string controller: Controller instance use for accessing runtime values like configuration, active language, etc.
          *
          * @return void
          */
-        public static function updateStatus_backUrl($decrypted, $translator, $controller)
+        public static function updateStatus_backUrl($decrypted, $controller)
         {
-            /** Represents the cart id */
+            /** Get the cart id */
             $cart_id = (int)$decrypted['externalOrderId'];
+            $module = $controller->module;
 
             $completed_ok = false;
             switch ($decrypted['status']) {
                 case Twispay_Status_Updater::$RESULT_STATUSES['COMPLETE_FAIL']:
                     /** Mark order as Failed. */
                     $status_id = Configuration::get('PS_OS_ERROR');
-                    $order_message = $translator->trans('Twispay payment failed');
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status failed for cart ID: ').$cart_id);
+                    $order_message = $module->l('Twispay payment failed');
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status failed for cart ID: ').$cart_id);
                 break;
 
                 case Twispay_Status_Updater::$RESULT_STATUSES['THREE_D_PENDING']:
                     /** Mark order as Pending. */
                     $status_id = Configuration::get('PS_OS_PREPARATION');
-                    $order_message = $translator->trans('Twispay payment is panding');
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status panding for cart ID: ').$cart_id);
+                    $order_message = $module->l('Twispay payment is pending');
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status pending for cart ID: ').$cart_id);
                 break;
 
                 case Twispay_Status_Updater::$RESULT_STATUSES['IN_PROGRESS']:
                 case Twispay_Status_Updater::$RESULT_STATUSES['COMPLETE_OK']:
                     /** Mark order as Processing. */
                     $status_id = Configuration::get('PS_OS_PAYMENT');
-                    $order_message =  $translator->trans('Paid Twispay');
+                    $order_message =  $module->l('Paid Twispay');
                     $completed_ok = true;
                     $amount = (float)$decrypted['amount'];
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status complete-ok for cart ID: ').$cart_id);
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status complete-ok for cart ID: ').$cart_id);
                 break;
 
                 default:
-                    Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Wrong status: ').$decrypted['status']);
+                    Twispay_Logger::log($module->l('[RESPONSE-ERROR]: Wrong status: ').$decrypted['status']);
                     return $controller->showNotice();
                 break;
             }
@@ -80,7 +81,7 @@ if (! class_exists('Twispay_Status_Updater')) :
             /** Check if cart is valid */
             $cart = new Cart($cart_id);
             if (!Validate::isLoadedObject($cart)) {
-                Twispay_Logger::log(sprintf($translator->trans('[RESPONSE-ERROR]: Cart #%s could not be loaded.'), $cart_id));
+                Twispay_Logger::log(sprintf($module->l('[RESPONSE-ERROR]: Cart #%s could not be loaded.'), $cart_id));
                 return $controller->showNotice();
             }
 
@@ -89,14 +90,14 @@ if (! class_exists('Twispay_Status_Updater')) :
             $decrypted['customerId'] = $id_customer;
             $customer = new Customer($id_customer);
             if (!Validate::isLoadedObject($customer)) {
-                Twispay_Logger::log(sprintf($translator->trans('[RESPONSE-ERROR]: Customer #%s could not be loaded.'), $id_customer));
+                Twispay_Logger::log(sprintf($module->l('[RESPONSE-ERROR]: Customer #%s could not be loaded.'), $id_customer));
                 return $controller->showNotice();
             }
 
             /** Check if currency is valid */
             $id_currency = (int)Currency::getIdByIsoCode($decrypted['currency']);
             if (!$id_currency) {
-                Twispay_Logger::log($translator->trans($translator->trans('[RESPONSE-ERROR]: Wrong Currency: '). $decrypted['currency']));
+                Twispay_Logger::log($module->l($module->l('[RESPONSE-ERROR]: Wrong Currency: '). $decrypted['currency']));
                 return $controller->showNotice();
             }
 
@@ -106,9 +107,9 @@ if (! class_exists('Twispay_Status_Updater')) :
                 /** Check if order exist */
                 if ($order_id) {
                     $order = new Order($order_id);
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Order updated.'));
+                    Twispay_Logger::log($module->l('[RESPONSE]: Order updated.'));
                     if ($amount!=0 && !$order->addOrderPayment($amount, null, null)) {
-                        Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Order payment registration failed'));
+                        Twispay_Logger::log($module->l('[RESPONSE-ERROR]: Order payment registration failed'));
                         return $controller->showNotice();
                     }
                     $order->setCurrentState($status_id);
@@ -126,9 +127,9 @@ if (! class_exists('Twispay_Status_Updater')) :
                         $customer->secure_key
                     )) {
                         $order_id = Order::getOrderByCartId($cart_id);
-                        Twispay_Logger::log($translator->trans('[RESPONSE]: Order created.'));
+                        Twispay_Logger::log($module->l('[RESPONSE]: Order created.'));
                     } else {
-                        Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Could not validate order'));
+                        Twispay_Logger::log($module->l('[RESPONSE-ERROR]: Could not validate order'));
                         return $controller->showNotice();
                     }
                 }
@@ -145,16 +146,17 @@ if (! class_exists('Twispay_Status_Updater')) :
          * Update the status of an order according to the received server status.
          *
          * @param object decrypted: Decrypted order message.
-         * @param object translator: Language object
+         * @param object module: The module instance
          * @param string controller: Controller instance use for accessing runtime values like configuration, active language, etc.
          *
          * @return void
          */
-
-        public static function updateStatus_ipn($decrypted, $translator, $controller)
+        public static function updateStatus_ipn($decrypted, $controller)
         {
-            /** Represents the cart id */
+            /** Get the cart id */
             $cart_id = $decrypted['externalOrderId'];
+            $module = $controller->module;
+
             $completed_ok = false;
             switch ($decrypted['status']) {
                 case Twispay_Status_Updater::$RESULT_STATUSES['EXPIRING']:
@@ -163,53 +165,53 @@ if (! class_exists('Twispay_Status_Updater')) :
                 case Twispay_Status_Updater::$RESULT_STATUSES['CHARGE_BACK']:
                     /** Mark order as Canceled. */
                     $status_id = Configuration::get('PS_OS_CANCELED');
-                    $order_message = $translator->trans('Twispay payment was canceled');
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status canceled for cart ID: ').$cart_id);
+                    $order_message = $module->l('Twispay payment was canceled');
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status canceled for cart ID: ').$cart_id);
                 break;
 
                 case Twispay_Status_Updater::$RESULT_STATUSES['REFUND_OK']:
                     /** Mark order as Refunded. */
                     $status_id = Configuration::get('PS_OS_REFUND');
-                    $order_message = $translator->trans('Twispay payment was refunded');
+                    $order_message = $module->l('Twispay payment was refunded');
                     $amount = (float)$decrypted['amount']*-1;
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status refunded for cart ID: ').$cart_id);
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status refunded for cart ID: ').$cart_id);
                 break;
 
                 case Twispay_Status_Updater::$RESULT_STATUSES['COMPLETE_FAIL']:
                     /** Mark order as Failed. */
                     $status_id = Configuration::get('PS_OS_ERROR');
-                    $order_message = $translator->trans('Twispay payment failed');
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status failed for cart ID: ').$cart_id);
+                    $order_message = $module->l('Twispay payment failed');
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status failed for cart ID: ').$cart_id);
                 break;
 
                 case Twispay_Status_Updater::$RESULT_STATUSES['THREE_D_PENDING']:
                     /** Mark order as Pending. */
                     $status_id = Configuration::get('PS_OS_PREPARATION');
-                    $order_message = $translator->trans('Twispay payment is panding');
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status panding for cart ID: ').$cart_id);
+                    $order_message = $module->l('Twispay payment is pending');
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status pending for cart ID: ').$cart_id);
                 break;
 
                 case Twispay_Status_Updater::$RESULT_STATUSES['IN_PROGRESS']:
                 case Twispay_Status_Updater::$RESULT_STATUSES['COMPLETE_OK']:
                     /** Mark order as Processing. */
                     $status_id = Configuration::get('PS_OS_PAYMENT');
-                    $order_message =  $translator->trans('Paid Twispay');
+                    $order_message =  $module->l('Paid Twispay');
                     $completed_ok = true;
                     $amount = (float)$decrypted['amount'];
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Status complete-ok for cart ID: ').$cart_id);
+                    Twispay_Logger::log($module->l('[RESPONSE]: Status complete-ok for cart ID: ').$cart_id);
                 break;
 
                 default:
-                    Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Wrong status: ').$decrypted['status']);
-                    die();
+                    Twispay_Logger::log($module->l('[RESPONSE-ERROR]: Wrong status: ').$decrypted['status']);
+                    return false;
                 break;
             }
 
             /** Check if cart is valid */
             $cart = new Cart($cart_id);
             if (!Validate::isLoadedObject($cart)) {
-                Twispay_Logger::log(sprintf($translator->trans('[RESPONSE-ERROR]: Cart #%s could not be loaded'), $cart_id));
-                die();
+                Twispay_Logger::log(sprintf($module->l('[RESPONSE-ERROR]: Cart #%s could not be loaded'), $cart_id));
+                return false;
             }
 
             /** Check if customer is valid */
@@ -217,15 +219,15 @@ if (! class_exists('Twispay_Status_Updater')) :
             $decrypted['customerId'] = $id_customer;
             $customer = new Customer($id_customer);
             if (!Validate::isLoadedObject($customer)) {
-                Twispay_Logger::log(sprintf($translator->trans('[RESPONSE-ERROR]: Customer #%s could not be loaded.'), $id_customer));
-                die();
+                Twispay_Logger::log(sprintf($module->l('[RESPONSE-ERROR]: Customer #%s could not be loaded.'), $id_customer));
+                return false;
             }
 
             /** Check if currency is valid */
             $id_currency = (int)Currency::getIdByIsoCode($decrypted['currency']);
             if (!$id_currency) {
-                Twispay_Logger::log($translator->trans($translator->trans('[RESPONSE-ERROR]: Wrong Currency: '). $decrypted['currency']));
-                die();
+                Twispay_Logger::log($module->l($module->l('[RESPONSE-ERROR]: Wrong Currency: '). $decrypted['currency']));
+                return false;
             }
 
             /** Check if status is valid */
@@ -234,10 +236,10 @@ if (! class_exists('Twispay_Status_Updater')) :
                 /** Check if order exist */
                 if ($order_id) {
                     $order = new Order($order_id);
-                    Twispay_Logger::log($translator->trans('[RESPONSE]: Order updated.'));
+                    Twispay_Logger::log($module->l('[RESPONSE]: Order updated.'));
                     if ($amount!=0 && !$order->addOrderPayment($amount, null, null)) {
-                        Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Order payment registration failed'));
-                        die();
+                        Twispay_Logger::log($module->l('[RESPONSE-ERROR]: Order payment registration failed'));
+                        return false;
                     }
                     $order->setCurrentState($status_id);
                 /** If order did not exist create a new one */
@@ -253,16 +255,16 @@ if (! class_exists('Twispay_Status_Updater')) :
                         false,
                         $customer->secure_key
                     )) {
-                        Twispay_Logger::log($translator->trans('[RESPONSE]: Order created.'));
+                        Twispay_Logger::log($module->l('[RESPONSE]: Order created.'));
                     } else {
-                        Twispay_Logger::log($translator->trans('[RESPONSE-ERROR]: Could not validate order'));
-                        die();
+                        Twispay_Logger::log($module->l('[RESPONSE-ERROR]: Could not validate order'));
+                        return false;
                     }
                 }
                 if ($completed_ok) {
-                    die('OK');
+                    return true;
                 } else {
-                    die();
+                    return false;
                 }
             }
         }

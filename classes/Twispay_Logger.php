@@ -4,7 +4,7 @@
  *
  * Logs messages and transactions.
  *
- * @author   Twistpay
+ * @author   Twispay
  * @version  1.0.1
  */
 
@@ -28,7 +28,7 @@ if (! class_exists('Twispay_Logger')) :
             $log_file = dirname(__FILE__).'/../logs/transactions.log';
             /* Build the log message. */
             $message = (!$message) ? (PHP_EOL . PHP_EOL) : ("[" . date('Y-m-d H:i:s') . "] " . $message);
-            /* Try to append log to file and silence and PHP errors may occur. */
+            /* Try to append log to file and silence any PHP errors may occur. */
             @file_put_contents($log_file, $message . PHP_EOL, FILE_APPEND);
         }
 
@@ -44,7 +44,7 @@ if (! class_exists('Twispay_Logger')) :
             $log_file = dirname(__FILE__).'/../logs/requests.log';
             /* Build the log message. */
             $message = (!$message) ? (PHP_EOL . PHP_EOL) : ("[" . date('Y-m-d H:i:s') . "] " . $message);
-            /* Try to append log to file and silence and PHP errors may occur. */
+            /* Try to append log to file and silence any PHP errors may occur. */
             @file_put_contents($log_file, $message . PHP_EOL, FILE_APPEND);
         }
     }

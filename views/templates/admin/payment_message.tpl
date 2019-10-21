@@ -1,5 +1,5 @@
 {**
-* @author   Twistpay
+* @author   Twispay
 * @version  1.0.1
 *}
 
@@ -33,7 +33,7 @@
       </tr>
       <tr>
         <td>
-          <strong>{l s='Twispay orderId:' mod='twispay'}</strong>
+          <strong>{l s='Twispay order ID:' mod='twispay'}</strong>
         </td>
         <td>
           {$data.orderId|escape:'html':'utf-8'}
@@ -41,7 +41,7 @@
       </tr>
       <tr>
         <td>
-          <strong>{l s='Twispay transactionId:' mod='twispay'}</strong>
+          <strong>{l s='Twispay transaction ID:' mod='twispay'}</strong>
         </td>
         <td>
           {$data.transactionId|escape:'html':'utf-8'}
@@ -49,7 +49,7 @@
       </tr>
       <tr>
         <td>
-          <strong>{l s='Twispay customerId:' mod='twispay'}</strong>
+          <strong>{l s='Twispay customer ID:' mod='twispay'}</strong>
         </td>
         <td>
           {$data.customerId|escape:'html':'utf-8'}
@@ -57,7 +57,7 @@
       </tr>
       <tr>
         <td>
-          <strong>{l s='Twispay transactionKind:' mod='twispay'}</strong>
+          <strong>{l s='Twispay transaction kind:' mod='twispay'}</strong>
         </td>
         <td>
           {$data.transactionKind|escape:'html':'utf-8'}
@@ -65,7 +65,7 @@
       </tr>
       <tr>
         <td>
-          <strong>{l s='Twispay cardId:' mod='twispay'}</strong>
+          <strong>{l s='Twispay card ID:' mod='twispay'}</strong>
         </td>
         <td>
           {$data.cardId|escape:'html':'utf-8'}
