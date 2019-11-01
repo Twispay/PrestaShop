@@ -76,7 +76,7 @@ if (! class_exists('Twispay_Transactions')) :
                 unset($data['timestamp']);
             }
             /** Keep just the customer id from identifier */
-            if (!empty($data['identifier'])) {
+            if (!empty($data['identifier']) && strpos($data['identifier'], '_') !== false) {
                 $data['identifier'] = pSQL(explode("_", $data['identifier'])[1]);
             }
             Db::getInstance()->insert('twispay_transactions', $data);
@@ -157,6 +157,7 @@ if (! class_exists('Twispay_Transactions')) :
          *
          * @param array transaction - Twispay transaction info
          * @param array keys - Api keys
+         * @param string module: Module instance use for accessing runtime values like configuration, active language, etc.
          *
          * @return array([key => value,]) - string 'status'         - API Message
          *                                  string 'rawdata'        - Unprocessed response
@@ -165,7 +166,7 @@ if (! class_exists('Twispay_Transactions')) :
          *                                  boolean 'refunded'      - Operation success indicator
          *
          */
-        public static function refundTransaction($transaction, $keys)
+        public static function refundTransaction($transaction, $keys, $module)
         {
             /** Create the post message */
             $postData = 'amount=' . $transaction['amount'] . '&' . 'message=' . 'Refund for order ' . $transaction['orderId'];
@@ -190,8 +191,8 @@ if (! class_exists('Twispay_Transactions')) :
             /** Check if curl decode fails */
             if (!isset($json)) {
                 $json = new stdClass();
-                $json->message = $this->l('json_decode_error');
-                Twispay_Logger::api_log($this->l('json_decode_error'));
+                $json->message = $module->l('json_decode_error');
+                Twispay_Logger::api_log($module->l('json_decode_error'));
             }
 
             if ($json->code == 200 && $json->message == 'Success') {

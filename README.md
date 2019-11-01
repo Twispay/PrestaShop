@@ -17,7 +17,7 @@ Install
 4. Download the archive of the registered module on your computer.
 5. In the line of the new module, click on Install.
 6. Click on Configure.
-7. Select **YES** under **Live Mode**. _(Unless you are tesing)_
+7. Select **YES** under **Live Mode**. _(Unless you are testing)_
 8. Enter your **Live Site ID**. _(Twispay Live Site ID)_
 9. Enter your **Live Private key**. _(Twispay Live Private key)_
 10. Save your changes.
@@ -31,7 +31,7 @@ Install
 6. Locate the new module in the list, scrolling down if necessary.
 5. In the line of the new module, click on Install.
 7. Click on Configure.
-8. Select **YES** under **Live Mode**. _(Unless you are tesing)_
+8. Select **YES** under **Live Mode**. _(Unless you are testing)_
 9. Enter your **Live Site ID**. _(Twispay Live Site ID)_
 10. Enter your **Live Private key**. _(Twispay Live Private key)_
 11. Save your changes.

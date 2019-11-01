@@ -57,7 +57,11 @@ if (! class_exists('Twispay_Response')) :
 
             /* Normalize values */
             $decryptedResponse['status'] = (empty($decryptedResponse['status'])) ? ($decryptedResponse['transactionStatus']) : ($decryptedResponse['status']);
-            $decryptedResponse['externalOrderId'] = explode('_', $decryptedResponse['externalOrderId'])[0];
+
+            /** Check if externalOrderId uses '_' separator */
+            if (strpos($decryptedResponse['externalOrderId'], '_') !== false) {
+              $decryptedResponse['externalOrderId'] = explode('_', $decryptedResponse['externalOrderId'])[0];
+            }
             $decryptedResponse['cardId'] = (!empty($decryptedResponse['cardId'])) ? ($decryptedResponse['cardId']) : (0);
 
             return $decryptedResponse;
@@ -150,10 +154,10 @@ if (! class_exists('Twispay_Response')) :
                         , 'amount'          => (float)$tw_response['amount']
                         , 'currency'        => $tw_response['currency']
                         , 'timestamp'       => $tw_response['timestamp']];
-                        
+
                 /** Insert the new transaction */
                 Twispay_Transactions::insertTransaction($data);
-                Twispay_Logger::log($module->l('[RESPONSE]: Data: %s').Tools::jsonEncode($data));
+                Twispay_Logger::log($module->l('[RESPONSE]: Data: ').Tools::jsonEncode($data));
                 Twispay_Logger::log($module->l('[RESPONSE]: Validating completed for cart ID: ').$data['id_cart']);
                 return true;
             }
