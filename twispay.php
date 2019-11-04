@@ -488,7 +488,7 @@ class Twispay extends PaymentModule
                     $customer_inputs['country'] = $countryObj->iso_code;
                     /** Check if state is valid */
                     /** Only for US */
-                    if ((int)$addressObj->id_state && $inputs['country'] == 'US') {
+                    if ((int)$addressObj->id_state && $customer_inputs['country'] == 'US') {
                         $state = new State($addressObj->id_state);
                         if (Validate::isLoadedObject($state)) {
                             $customer_inputs['state'] = $state->iso_code;

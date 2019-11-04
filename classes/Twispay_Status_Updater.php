@@ -47,6 +47,7 @@ if (! class_exists('Twispay_Status_Updater')) :
             $module = $controller->module;
 
             $completed_ok = false;
+            $amount = 0;
             switch ($decrypted['status']) {
                 case Twispay_Status_Updater::$RESULT_STATUSES['COMPLETE_FAIL']:
                     /** Mark order as Failed. */
@@ -68,7 +69,7 @@ if (! class_exists('Twispay_Status_Updater')) :
                     $status_id = Configuration::get('PS_OS_PAYMENT');
                     $order_message =  $module->l('Paid Twispay');
                     $completed_ok = true;
-                    $amount = (float)$decrypted['amount'];
+                    $amount = $decrypted['amount'];
                     Twispay_Logger::log($module->l('[RESPONSE]: Status complete-ok for cart ID: ').$cart_id);
                 break;
 
@@ -104,7 +105,7 @@ if (! class_exists('Twispay_Status_Updater')) :
             /** Check if status is valid */
             if ($status_id) {
                 $order_id = Order::getOrderByCartId($cart->id);
-                /** Check if order exist */
+                /** Check if order exists */
                 if ($order_id) {
                     $order = new Order($order_id);
                     Twispay_Logger::log($module->l('[RESPONSE]: Order updated.'));
@@ -113,12 +114,12 @@ if (! class_exists('Twispay_Status_Updater')) :
                         return $controller->showNotice();
                     }
                     $order->setCurrentState($status_id);
-                /** If order did not exist create a new one */
+                /** If order didn't exist create a new one */
                 } else {
                     if ($controller->module->validateOrder(
                         $cart_id,
                         $status_id,
-                        $amount?$amount:0,
+                        $amount,
                         $controller->module->displayName,
                         $order_message,
                         null,
@@ -158,6 +159,7 @@ if (! class_exists('Twispay_Status_Updater')) :
             $module = $controller->module;
 
             $completed_ok = false;
+            $amount = 0;
             switch ($decrypted['status']) {
                 case Twispay_Status_Updater::$RESULT_STATUSES['EXPIRING']:
                 case Twispay_Status_Updater::$RESULT_STATUSES['CANCEL_OK']:
@@ -173,7 +175,7 @@ if (! class_exists('Twispay_Status_Updater')) :
                     /** Mark order as Refunded. */
                     $status_id = Configuration::get('PS_OS_REFUND');
                     $order_message = $module->l('Twispay payment was refunded');
-                    $amount = (float)$decrypted['amount']*-1;
+                    $amount = $decrypted['amount']*-1;
                     Twispay_Logger::log($module->l('[RESPONSE]: Status refunded for cart ID: ').$cart_id);
                 break;
 
@@ -197,7 +199,7 @@ if (! class_exists('Twispay_Status_Updater')) :
                     $status_id = Configuration::get('PS_OS_PAYMENT');
                     $order_message =  $module->l('Paid Twispay');
                     $completed_ok = true;
-                    $amount = (float)$decrypted['amount'];
+                    $amount = $decrypted['amount'];
                     Twispay_Logger::log($module->l('[RESPONSE]: Status complete-ok for cart ID: ').$cart_id);
                 break;
 
@@ -247,7 +249,7 @@ if (! class_exists('Twispay_Status_Updater')) :
                     if ($controller->module->validateOrder(
                         $cart_id,
                         $status_id,
-                        $amount?$amount:0,
+                        $amount,
                         $controller->module->displayName,
                         $order_message,
                         null,
@@ -261,11 +263,11 @@ if (! class_exists('Twispay_Status_Updater')) :
                         return false;
                     }
                 }
-                if ($completed_ok) {
-                    return true;
-                } else {
-                    return false;
-                }
+            }
+            if ($completed_ok) {
+                return true;
+            } else {
+                return false;
             }
         }
     }
