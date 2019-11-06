@@ -1,2 +1,0 @@
-[2019-11-01 09:27:29] Twispay refund error: {"status":"This transaction can not be refunded","rawdata":{"code":409,"message":"Conflict","error":[{"code":826,"message":"This transaction can not be refunded","type":"Exception"}]},"id_transaction":"342168","id_cart":"74","refunded":0}
-[2019-11-01 09:28:07] Twispay refund error: {"status":"This transaction can not be refunded","rawdata":{"code":409,"message":"Conflict","error":[{"code":826,"message":"This transaction can not be refunded","type":"Exception"}]},"id_transaction":"342168","id_cart":"74","refunded":0}

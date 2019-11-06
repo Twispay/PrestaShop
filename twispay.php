@@ -381,7 +381,7 @@ class Twispay extends PaymentModule
                         Tools::redirect($_SERVER['HTTP_REFERER']);
                         die();
                     }
-                    $refund = Twispay_Transactions::refundTransaction($transaction, $keys);
+                    $refund = Twispay_Transactions::refundTransaction($transaction, $keys, $this);
                     if ($refund['refunded']) {
                         Twispay_Logger::api_log($this->l('Successfully refunded ').json_encode($refund));
                     } else {
