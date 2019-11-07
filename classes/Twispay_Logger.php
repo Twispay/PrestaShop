@@ -79,7 +79,7 @@ if (! class_exists('Twispay_Logger')) :
          */
         public static function api_log($message = false)
         {
-            $log_file = dirname(__FILE__).self::$DIR_LOGS.'/requests.log';
+            $log_file = dirname(__FILE__).self::$DIR_LOGS.'requests.log';
             /* Build the log message. */
             $message = (!$message) ? (PHP_EOL . PHP_EOL) : ("[" . date('Y-m-d H:i:s') . "] " . $message);
             /* Try to append log to file and silence any PHP errors may occur. */
