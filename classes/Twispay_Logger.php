@@ -34,7 +34,7 @@ if (! class_exists('Twispay_Logger')) :
         }
 
         /**
-         * Recursively removes directory and its content
+         * Recursively removes directory content
          *
          * @param string path - The logs directory path.
          *
