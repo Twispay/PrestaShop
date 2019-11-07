@@ -34,14 +34,14 @@ if (! class_exists('Twispay_Logger')) :
         }
 
         /**
-         * Recursively removes directory content
+         * Recursively removes directory and its content
          *
          * @param string path - The logs directory path.
          *
-         * @return boolean - TRUE
+         * @return boolean - TRUE / FALSE
          *
          */
-        public static function cleanLogDir($path = false)
+        public static function delLogDir($path = false)
         {
             if (!$path) {
                 $path = dirname(__FILE__).self::$DIR_LOGS;
@@ -49,10 +49,10 @@ if (! class_exists('Twispay_Logger')) :
             $files = array_diff(scandir($path), array('.', '..'));
 
             foreach ($files as $file) {
-                unlink("$path/$file");
+                (is_dir("$path/$file")) ? delLogDir("$path/$file") : unlink("$path/$file");
             }
 
-            return true;
+            return rmdir($path);
         }
         /**
          * Function that logs a message to the transaction log file.
