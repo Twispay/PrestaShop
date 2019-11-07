@@ -58,7 +58,7 @@ class Twispay extends PaymentModule
     {
         Configuration::deleteByName('TWISPAY_LIVE_MODE');
         Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'twispay_transactions`');
-
+        Twispay_Logger::cleanLogDir();
         return parent::uninstall();
     }
 
