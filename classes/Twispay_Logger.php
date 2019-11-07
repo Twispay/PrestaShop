@@ -16,6 +16,44 @@ if (! class_exists('Twispay_Logger')) :
      */
     class Twispay_Logger
     {
+        public static $DIR_LOGS = '/../logs/';
+        /**
+         * Attempts to create the directory specified by pathname.
+         *
+         * @param string path - The logs directory path.
+         *
+         * @return boolean - true / false
+         *
+         */
+        public static function makeLogDir($path = false)
+        {
+            if (!$path) {
+                $path = dirname(__FILE__).self::$DIR_LOGS;
+            }
+            return is_dir($path) || mkdir($path);
+        }
+
+        /**
+         * Recursively removes directory and its content
+         *
+         * @param string path - The logs directory path.
+         *
+         * @return boolean - TRUE
+         *
+         */
+        public static function cleanLogDir($path = false)
+        {
+            if (!$path) {
+                $path = dirname(__FILE__).self::$DIR_LOGS;
+            }
+            $files = array_diff(scandir($path), array('.', '..'));
+
+            foreach ($files as $file) {
+                unlink("$path/$file");
+            }
+
+            return true;
+        }
         /**
          * Function that logs a message to the transaction log file.
          *
@@ -25,7 +63,7 @@ if (! class_exists('Twispay_Logger')) :
          */
         public static function log($message = false)
         {
-            $log_file = dirname(__FILE__).'/../logs/transactions.log';
+            $log_file = dirname(__FILE__).self::$DIR_LOGS.'transactions.log';
             /* Build the log message. */
             $message = (!$message) ? (PHP_EOL . PHP_EOL) : ("[" . date('Y-m-d H:i:s') . "] " . $message);
             /* Try to append log to file and silence any PHP errors may occur. */
@@ -41,7 +79,7 @@ if (! class_exists('Twispay_Logger')) :
          */
         public static function api_log($message = false)
         {
-            $log_file = dirname(__FILE__).'/../logs/requests.log';
+            $log_file = dirname(__FILE__).self::$DIR_LOGS.'/requests.log';
             /* Build the log message. */
             $message = (!$message) ? (PHP_EOL . PHP_EOL) : ("[" . date('Y-m-d H:i:s') . "] " . $message);
             /* Try to append log to file and silence any PHP errors may occur. */

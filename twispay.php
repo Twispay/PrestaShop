@@ -42,9 +42,10 @@ class Twispay extends PaymentModule
     public function install()
     {
         Configuration::updateValue('TWISPAY_LIVE_MODE', false);
+        Twispay_Transactions::createTransactionsTable();
+        Twispay_Logger::makeLogDir();
 
         return parent::install() &&
-            Twispay_Transactions::createTransactionsTable() &&
             $this->registerHook('displayHeader') &&
             $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHook('displayPaymentReturn') &&

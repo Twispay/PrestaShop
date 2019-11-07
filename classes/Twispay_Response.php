@@ -60,8 +60,13 @@ if (! class_exists('Twispay_Response')) :
 
             /** Check if externalOrderId uses '_' separator */
             if (strpos($decryptedResponse['externalOrderId'], '_') !== false) {
-              $decryptedResponse['externalOrderId'] = explode('_', $decryptedResponse['externalOrderId'])[0];
+              $explodedVal = explode('_', $decryptedResponse['externalOrderId'])[0];
+              /** Check if externalOrderId contains only digits and is not empty */
+              if(!empty($explodedVal) && ctype_digit($explodedVal)){
+                 $decryptedResponse['externalOrderId'] = pSQL($explodedVal);
+              }
             }
+
             $decryptedResponse['cardId'] = (!empty($decryptedResponse['cardId'])) ? ($decryptedResponse['cardId']) : (0);
 
             return $decryptedResponse;

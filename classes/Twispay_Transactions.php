@@ -77,8 +77,13 @@ if (! class_exists('Twispay_Transactions')) :
             }
             /** Keep just the customer id from identifier */
             if (!empty($data['identifier']) && strpos($data['identifier'], '_') !== false) {
-                $data['identifier'] = pSQL(explode("_", $data['identifier'])[1]);
+               $explodedVal = explode("_", $data['identifier'])[1];
+               /** Check if customer id contains only digits and is not empty */
+               if(!empty($explodedVal) && ctype_digit($explodedVal)){
+            	   $data['identifier'] = pSQL($explodedVal);
+               }
             }
+
             Db::getInstance()->insert('twispay_transactions', $data);
             return $data;
         }
