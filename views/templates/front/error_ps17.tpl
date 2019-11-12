@@ -1,15 +1,6 @@
-{*
-* NOTICE OF LICENSE
-*
-* This file is licenced under the Software License Agreement.
-* With the purchase or the installation of the software in your application
-* you accept the licence agreement.
-*
-* You must not modify, adapt or create derivative works of this source code.
-*
-*  @author    Active Design <office@activedesign.ro>
-*  @copyright 2017 Active Design
-*  @license   LICENSE.txt
+{**
+* @author   Twispay
+* @version  1.0.1
 *}
 
 {extends file='page.tpl'}
@@ -17,7 +8,7 @@
 	<div>
 		<h3>{l s='An error occurred' mod='twispay'}:</h3>
 		<ul class="alert alert-danger">
-			<li>{l s='The payment could not be processed. You should have received more informations on the previous page' mod='twispay'}</li>
+			<li>{l s='The payment could not be processed. Please ' mod='twispay'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='contact' mod='twispay'}</a> {l s=' our expert customer support team.' mod='twispay'}</li>
 		</ul>
 	</div>
 {/block}
