@@ -81,7 +81,7 @@ if (! class_exists('Twispay_Transactions')) :
             }
             /** Keep just the customer id from identifier */
             if (!empty($data['identifier']) && strpos($data['identifier'], '_') !== false) {
-               $explodedVal = explode("_", $data['identifier'])[1];
+               $explodedVal = explode("_", $data['identifier'])[2];
                /** Check if customer id contains only digits and is not empty */
                if(!empty($explodedVal) && ctype_digit($explodedVal)){
             	   $data['identifier'] = pSQL($explodedVal);
