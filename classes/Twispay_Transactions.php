@@ -72,12 +72,16 @@ if (! class_exists('Twispay_Transactions')) :
             }
             /** Convert data value to mysql format */
             if (!empty($data['timestamp'])) {
-                $data['date'] = pSQL(date('Y-m-d H:i:s', $data['timestamp']));
+                if (is_array($data['timestamp'])) {
+                    $data['date'] = date('Y-m-d H:i:s', strtotime($data['timestamp']['date']));
+                } else {
+                    $data['date'] = date('Y-m-d H:i:s', $data['timestamp']);
+                }
                 unset($data['timestamp']);
             }
             /** Keep just the customer id from identifier */
             if (!empty($data['identifier']) && strpos($data['identifier'], '_') !== false) {
-               $explodedVal = explode("_", $data['identifier'])[1];
+               $explodedVal = explode("_", $data['identifier'])[2];
                /** Check if customer id contains only digits and is not empty */
                if(!empty($explodedVal) && ctype_digit($explodedVal)){
             	   $data['identifier'] = pSQL($explodedVal);

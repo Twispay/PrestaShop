@@ -106,7 +106,7 @@ if (! class_exists('Twispay_Response')) :
                 $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty transactionId.');
             }
             /** Check if external order id is a definex prestashop cart id */
-            $id_cart = (!empty($tw_response['externalOrderId'])) ? explode('_', $tw_response['externalOrderId'])[0] : 0;
+            $id_cart = (!empty($tw_response['externalOrderId'])) ? $tw_response['externalOrderId'] : 0;
             $cart = new Cart($id_cart);
             $cartFound = false;
             if (Validate::isLoadedObject($cart)) {
