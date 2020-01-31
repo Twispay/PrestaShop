@@ -470,7 +470,8 @@ class Twispay extends PaymentModule
 
         /* Customer data */
         $customer_inputs = array();
-        $customer_inputs['identifier'] = '_'.$params['cart']->id_customer.'_'.date('YmdHis');
+        $customerPrefix = "p";
+        $customer_inputs['identifier'] = $this->buildCustomerId($customerPrefix,$params['cart']->id_customer);
         $customerObj = new Customer((int)$params['cart']->id_customer);
         if (Validate::isLoadedObject($customerObj)) {
             $customer_inputs['firstName'] = $customerObj->firstname;
@@ -636,6 +637,18 @@ class Twispay extends PaymentModule
         );
     }
 
+    /** Getter for customer ID
+    *
+    * @param object $customer id - The prestashop customer id
+    *
+    * @return string - The resulted customer id
+    *
+    */
+    public function buildCustomerId($prefix,$customer_id)
+    {
+        return $prefix.'_ps_'.$customer_id.'_'.date('YmdHis');
+    }
+
     /** Getter for order ID
     *
     * @param object $cart_id - The cart id
@@ -645,6 +658,6 @@ class Twispay extends PaymentModule
     */
     public function buildOrderId($cart_id)
     {
-        return $cart_id.'_'.time();
+        return $cart_id;
     }
 }

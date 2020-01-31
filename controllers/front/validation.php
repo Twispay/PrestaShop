@@ -14,14 +14,14 @@ class TwispayValidationModuleFrontController extends ModuleFrontController
         /** Check if the POST is corrupted: Doesn't contain the 'opensslResult' and the 'result' fields. */
         if (false == Tools::getValue('opensslResult') && false == Tools::getValue('result')) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Received empty response.'));
-            die("NO DATA SENT");
+            die($this->l('[RESPONSE-ERROR]: Received empty response.'));
         }
 
         /** Check if the api key is defined */
         $keys = $this->module->getKeysInfo();
         if (!$keys) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Private key is not valid.'));
-            die();
+            die($this->l('[RESPONSE-ERROR]: Private key is not valid.'));
         }
         $apiKey = $keys['privateKey'];
 
@@ -31,7 +31,7 @@ class TwispayValidationModuleFrontController extends ModuleFrontController
         /** Check if decryption failed.  */
         if (false === $decrypted) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Decryption failed.'));
-            die();
+            die($this->l('[RESPONSE-ERROR]: Decryption failed.'));
         } else {
             Twispay_Logger::log($this->l('[RESPONSE]: Decrypted string: ').Tools::jsonEncode($decrypted));
         }
@@ -39,7 +39,7 @@ class TwispayValidationModuleFrontController extends ModuleFrontController
         /** Check if order already exist */
         if (Twispay_Transactions::checkTransaction($decrypted['transactionId'])) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Order already validated, transaction id '). $decrypted['transactionId']);
-            die();
+            die("OK");
         }
 
         /** Validate the decripted response. */
@@ -48,14 +48,14 @@ class TwispayValidationModuleFrontController extends ModuleFrontController
         /** Check if server response validation failed.  */
         if (true !== $orderValidation) {
             Twispay_Logger::log($this->l('[RESPONSE-ERROR]: Validation failed.'));
-            die();
+            die($this->l('[RESPONSE-ERROR]: Validation failed.'));
         }
 
         /** Update the transaction status. */
         if(Twispay_Status_Updater::updateStatus_ipn($decrypted, $this)){
           die('OK');
         }else{
-          die();
+          die("Internal processing failure");
         }
     }
 }

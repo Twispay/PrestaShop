@@ -1,7 +1,23 @@
-prestashop-Twispay_Payments
-=========================
+=== Twispay Credit Card Payments ===
+Contributors: twispay
+Tags: payment, gateway, module
+Requires at least: Prestashop v 1.7.0.0
+Tested up to: Prestashop v 1.7.6.1
 
-The official [Twispay Payment Gateway][twispay] extension for Prestashop.
+Twispay enables new and existing store owners to quickly and effortlessly accept online credit card payments over their Prestashop shop
+
+Description
+===========
+
+Credit Card Payments by Twispay is the official [payment module for Oscommerce](https://www.twispay.com/prestashop) which allows for a quick and easy integration to Twispay’s Payment Gateway for accepting online credit card payments through a secure environment and a fully customisable checkout process. Give your customers the shopping experience they expect, and boost your online sales with our simple and elegant payment plugin.
+
+[Twispay](https://www.twispay.com) is a European certified acquiring bank with a sleek payment gateway optimized for online shops. We process payments from worldwide customers using Mastercard or Visa debit and credit cards. Increase your purchases by using our conversion rate optimized checkout flow and manage your transactions with our dashboard created specifically for online merchants like you.
+
+Twispay provides merchants with a lean way of accessing a complete portfolio of online payment services at the most competitive rates. For more details concerning our pricing in your area, please check out our [pricing page](https://www.twispay.com/prices). To use our payment module and start processing you will need a [Twispay merchant account](https://merchant-stage.twispay.com/register). For any assistance during the on-boarding process, our [sales and compliance](https://www.twispay.com/contact) team are happy to assist you with any enquiries you may have.
+
+We take pride in offering world class, free customer support to all our merchants during the integration phase, and at any time thereafter. Our [support team](https://www.twispay.com/contact) is available non-stop during regular business hours EET.
+
+Our prestashop payment extension allows for fast and easy integration with the Twispay Payment Gateway. Quickly start accepting online credit card payments through a secure environment and a fully customizable checkout process. Give your customers the shopping experience they expect, and boost your online sales with our simple and elegant payment plugin.
 
 At the time of purchase, after checkout confirmation, the customer will be redirected to the secure Twispay Payment Gateway.
 
@@ -27,7 +43,7 @@ Install
 2. Using your FTP software.
 3. Place the folder in your PrestaShop /modules folder.
 4. Connect to the BackOffice of your shop.
-5. Go to Back Office >> Modules.
+5. Go to Back Office > Modules.
 6. Locate the new module in the list, scrolling down if necessary.
 5. In the line of the new module, click on Install.
 7. Click on Configure.
@@ -46,12 +62,7 @@ Changelog
 
 = 1.0.0 =
 * Initial Plugin version
-
-<!-- Other Notes
-===========
-
-A functional description of the extension can be found on the [wiki page][doc] -->
-
-[twispay]: http://twispay.com
-[marketplace]: https://addons.prestashop.com
-[github]: https://github.com/Twispay/PrestaShop
+* Merchant config interface
+* Integration with Twispay's Secure Hosted Payment Page
+* Listening URL which accepts the server’s Instant Payment Notifications
+* Replaced FORM used for server notification with JSON
