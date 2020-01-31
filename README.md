@@ -55,6 +55,10 @@ Install
 Changelog
 =========
 
+= 1.1.0 =
+* Fix - IPN die() error messages
+* Bug fix - if timestamp is array type, use it as an array
+
 = 1.0.1 =
 * Updated the way requests are sent to the Twispay server.
 * Updated the server response handling to process all the possible server response statuses.
