@@ -60,16 +60,8 @@ if (! class_exists('Twispay_Transactions')) :
               'transactionKind',
               'amount',
               'currency',
-              'timestamp',
+              'date',
             );
-            /** Filter data values and construct the insert query */
-            foreach (array_keys($data) as $key) {
-                if (!in_array($key, $columns)) {
-                    unset($data[$key]);
-                } else {
-                    $data[$key] = pSQL($data[$key]);
-                }
-            }
             /** Convert data value to mysql format */
             if (!empty($data['timestamp'])) {
                 if (is_array($data['timestamp'])) {
@@ -78,6 +70,14 @@ if (! class_exists('Twispay_Transactions')) :
                     $data['date'] = date('Y-m-d H:i:s', $data['timestamp']);
                 }
                 unset($data['timestamp']);
+            }
+            /** Filter data values and construct the insert query */
+            foreach (array_keys($data) as $key) {
+                if (!in_array($key, $columns)) {
+                    unset($data[$key]);
+                } else {
+                    $data[$key] = pSQL($data[$key]);
+                }
             }
             /** Keep just the customer id from identifier */
             if (!empty($data['identifier']) && strpos($data['identifier'], '_') !== false) {
