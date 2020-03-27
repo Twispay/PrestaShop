@@ -6,8 +6,10 @@ Tested up to: Prestashop v 1.7.6.1
 
 Twispay enables new and existing store owners to quickly and effortlessly accept online credit card payments over their Prestashop shop
 
+
 Description
 ===========
+***Note** :  In case you encounter any difficulties with integration, please contact us at support@twispay.com and we'll assist you through the process.*
 
 Credit Card Payments by Twispay is the official payment module for PrestaShop which allows for a quick and easy integration to Twispay’s Payment Gateway for accepting online credit card payments through a secure environment and a fully customisable checkout process. Give your customers the shopping experience they expect, and boost your online sales with our simple and elegant payment plugin.
 
