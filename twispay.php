@@ -4,8 +4,6 @@
  * @version  1.0.1
  */
 
-use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
-
 require _PS_MODULE_DIR_.'twispay/classes/Twispay_Encoder.php';
 require _PS_MODULE_DIR_.'twispay/classes/Twispay_Logger.php';
 require _PS_MODULE_DIR_.'twispay/classes/Twispay_Response.php';
@@ -27,7 +25,7 @@ class Twispay extends PaymentModule
         /** Initialize module members */
         $this->name = 'twispay';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.1';
+        $this->version = '1.0.3';
         $this->author = 'Twispay';
         $this->need_instance = 0;
         $this->module_key = 'd89110977c71a97d064d510cc90d760c';
@@ -45,13 +43,20 @@ class Twispay extends PaymentModule
         Twispay_Transactions::createTransactionsTable();
         Twispay_Logger::makeLogDir();
 
-        return parent::install() &&
+        $return = parent::install() &&
             $this->registerHook('displayHeader') &&
             $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHook('displayPaymentReturn') &&
-            $this->registerHook('paymentOptions') &&
             $this->registerHook('displayAdminOrderLeft') &&
             $this->registerHook('actionOrderStatusUpdate');
+
+        if (Tools::version_compare(_PS_VERSION_, '1.7.0.0', '>=')) {
+            $return &= $this->registerHook('paymentOptions');
+        } else {
+            $return &= $this->registerHook('displayPayment');
+        }
+
+        return $return;
     }
 
     public function uninstall()
@@ -402,8 +407,8 @@ class Twispay extends PaymentModule
         }
     }
 
-    /** Add Twispay payment option on checkout */
-    public function hookPaymentOptions($params)
+    /** Add Twispay payment option on checkout - Prestashop 1.6 */
+    public function hookDisplayPayment($params)
     {
         if (!$this->active || !self::getKeysInfo()) {
             return;
@@ -417,11 +422,29 @@ class Twispay extends PaymentModule
             'logos_folder' => _PS_BASE_URL_SSL_.__PS_BASE_URI__.'modules/'.$this->name.'/views/img/',
         ));
 
-        $newOption = new PaymentOption();
+        return $this->display(__FILE__, 'views/templates/hook/payment.tpl');
+    }
+
+    /** Add Twispay payment option on checkout - Prestashop 1.7 */
+    public function hookPaymentOptions($params)
+    {
+        if (!$this->active || !self::getKeysInfo() || !class_exists('PrestaShop\PrestaShop\Core\Payment\PaymentOption')) {
+            return;
+        }
+
+        $this->smarty->assign(
+            $this->getPaymentVars($params)
+        );
+
+        $this->smarty->assign(array(
+            'logos_folder' => _PS_BASE_URL_SSL_.__PS_BASE_URI__.'modules/'.$this->name.'/views/img/',
+        ));
+
+        $newOption = new PrestaShop\PrestaShop\Core\Payment\PaymentOption();
         $newOption->setModuleName($this->name)
-                  ->setCallToActionText($this->l('Pay by credit or debit card'))
-                  ->setForm($this->fetch('module:twispay/views/templates/hook/twispay_payment_form.tpl'))
-                  ->setAdditionalInformation($this->fetch('module:twispay/views/templates/hook/twispay_payment_extra.tpl'));
+            ->setCallToActionText($this->l('Pay by credit or debit card'))
+            ->setForm($this->fetch('module:twispay/views/templates/hook/twispay_payment_form.tpl'))
+            ->setAdditionalInformation($this->fetch('module:twispay/views/templates/hook/twispay_payment_extra.tpl'));
         $payment_options = array(
             $newOption,
         );
@@ -659,5 +682,10 @@ class Twispay extends PaymentModule
     public function buildOrderId($cart_id)
     {
         return $cart_id;
+    }
+
+    public function getPath()
+    {
+        return $this->_path;
     }
 }

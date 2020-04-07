@@ -99,4 +99,9 @@ class TwispayConfirmationModuleFrontController extends ModuleFrontController
             return $this->context->controller->setTemplate('error.tpl');
         }
     }
+
+    public function l($message)
+    {
+        return $this->module->l($message);
+    }
 }

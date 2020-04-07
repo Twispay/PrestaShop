@@ -21,9 +21,14 @@ class TwispayRedirectModuleFrontController extends ModuleFrontController
                 $this->module->getPaymentVars()
             );
             $this->context->controller->addJs($this->module->getPath().'/views/js/redirect.js');
-            $this->context->smarty->assign('module_path', $this->module->getPath());
+            $this->context->smarty->assign('module_path', _PS_MODULE_DIR_.'twispay/');
 
             return $this->setTemplate('redirect.tpl');
         }
+    }
+
+    public function l($message)
+    {
+        return $this->module->l($message);
     }
 }
