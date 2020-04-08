@@ -51,11 +51,25 @@ class TwispayValidationModuleFrontController extends ModuleFrontController
             die($this->l('[RESPONSE-ERROR]: Validation failed.'));
         }
 
+        /** Fix Kernel error in Prestashop 1.7.6 */
+        global $kernel;
+        if(!$kernel && file_exists(_PS_ROOT_DIR_.'/app/AppKernel.php')){
+            require_once _PS_ROOT_DIR_.'/app/AppKernel.php';
+            $kernel = new \AppKernel('prod', false);
+            $kernel->boot();
+        }
+        /** End fix */
+
         /** Update the transaction status. */
         if(Twispay_Status_Updater::updateStatus_ipn($decrypted, $this)){
           die('OK');
         }else{
           die("Internal processing failure");
         }
+    }
+
+    public function l($message)
+    {
+        return $this->module->l($message);
     }
 }
