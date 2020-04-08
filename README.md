@@ -2,7 +2,9 @@
 
 Tags: _payment_, _gateway_, _module_  
 Requires at least: Prestashop v *1.6.1.0*  
-Tested up to: Prestashop v *1.7.6.4*  
+Tested up to: Prestashop v *1.7.6.4*
+PrestaShop Module: Download twispay.zip from [Latest Release](https://github.com/Twispay/PrestaShop/releases/latest)
+
 
 Twispay enables new and existing store owners to quickly and effortlessly accept online credit card payments over their Prestashop shop
 
@@ -57,10 +59,11 @@ Install
 Changelog
 =========
 
-= 1.3.0 = 
+= 1.3.0 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.3.0/twispay.zip)
 * 1.6.x compatibility 
 
-= 1.1.0 =
+
+= 1.1.0 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.1.0/twispay.zip)
 * Fix - IPN die() error messages
 * Bug fix - if timestamp is array type, use it as an array
 
