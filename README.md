@@ -1,8 +1,8 @@
-=== Twispay Credit Card Payments ===
-Contributors: twispay
-Tags: payment, gateway, module
-Requires at least: Prestashop v 1.7.0.0
-Tested up to: Prestashop v 1.7.6.1
+=== Twispay Credit Card Payments ===  
+Contributors: twispay  
+Tags: payment, gateway, module  
+Requires at least: Prestashop v 1.6.1.0  
+Tested up to: Prestashop v 1.7.6.4  
 
 Twispay enables new and existing store owners to quickly and effortlessly accept online credit card payments over their Prestashop shop
 
