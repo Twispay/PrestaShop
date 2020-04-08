@@ -2,8 +2,9 @@
 
 Tags: _payment_, _gateway_, _module_  
 Requires at least: Prestashop v *1.6.1.0*  
-Tested up to: Prestashop v *1.7.6.4*
+Tested up to: Prestashop v *1.7.6.4*  
 PrestaShop Module: Download twispay.zip from [Latest Release](https://github.com/Twispay/PrestaShop/releases/latest)
+
 
 
 Twispay enables new and existing store owners to quickly and effortlessly accept online credit card payments over their Prestashop shop
