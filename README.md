@@ -35,7 +35,7 @@ Install
 1. Connect to the BackOffice of your PrestaShop shop.
 2. Go to the Modules tab.
 3. Click on the Add a new module link.
-4. Download the archive of the registered module on your computer.
+4. Download the **twispay.zip** archive from  [Latest Release](https://github.com/Twispay/PrestaShop/releases/latest)
 5. In the line of the new module, click on Install.
 6. Click on Configure.
 7. Select **YES** under **Live Mode**. _(Unless you are testing)_
@@ -44,7 +44,7 @@ Install
 10. Save your changes.
 
 ### Manually
-1. Unzip (decompress) the module archive file.
+1. Unzip (decompress) the module archive file (**twispay.zip** archive from [Latest Release](https://github.com/Twispay/PrestaShop/releases/latest)).
 2. Using your FTP software.
 3. Place the folder in your PrestaShop /modules folder.
 4. Connect to the BackOffice of your shop.
