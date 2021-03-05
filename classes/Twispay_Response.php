@@ -56,7 +56,7 @@ if (! class_exists('Twispay_Response')) :
             $decryptedResponse = json_decode($decryptedResponse, /*assoc*/true, /*depth*/4);
 
             /* Normalize values */
-            $decryptedResponse['status'] = (empty($decryptedResponse['status'])) ? ($decryptedResponse['transactionStatus']) : ($decryptedResponse['status']);
+            $decryptedResponse['status'] = $decryptedResponse['transactionStatus'];
 
             /** Check if externalOrderId uses '_' separator */
             if (strpos($decryptedResponse['externalOrderId'], '_') !== false) {
@@ -90,7 +90,7 @@ if (! class_exists('Twispay_Response')) :
                 return false;
             }
             /** Check if transaction status exists */
-            if (empty($tw_response['status']) && empty($tw_response['transactionStatus'])) {
+            if (empty($tw_response['transactionStatus'])) {
                 $tw_errors[] = $module->l('[RESPONSE-ERROR]: Empty status.');
             }
             /** Check if identifier exists */
@@ -155,7 +155,7 @@ if (! class_exists('Twispay_Response')) :
                         , 'orderId'         => (int)$tw_response['orderId']
                         , 'cardId'          => (int)$tw_response['cardId']
                         , 'transactionId'   => (int)$tw_response['transactionId']
-                        , 'transactionKind' => $tw_response['transactionKind']
+                        , 'transactionKind' => (!empty($tw_response['transactionMethod']) ? $tw_response['transactionMethod'] : '')
                         , 'amount'          => (float)$tw_response['amount']
                         , 'currency'        => $tw_response['currency']
                         , 'timestamp'       => $tw_response['timestamp']];
