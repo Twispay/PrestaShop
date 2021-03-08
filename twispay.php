@@ -1,7 +1,7 @@
 <?php
 /**
  * @author   Twispay
- * @version  1.3.0
+ * @version  1.3.1
  */
 
 require _PS_MODULE_DIR_.'twispay/classes/Twispay_Encoder.php';
@@ -25,7 +25,7 @@ class Twispay extends PaymentModule
         /** Initialize module members */
         $this->name = 'twispay';
         $this->tab = 'payments_gateways';
-        $this->version = '1.3.0';
+        $this->version = '1.3.1';
         $this->author = 'Twispay';
         $this->need_instance = 0;
         $this->module_key = 'd89110977c71a97d064d510cc90d760c';
