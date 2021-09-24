@@ -59,10 +59,11 @@ Install
 
 Changelog
 =========
+= 1.3.1 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.3.1/twispay.zip)
+* Fix an issue with prices over 1000
 
 = 1.3.0 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.3.0/twispay.zip)
 * 1.6.x compatibility 
-
 
 = 1.1.0 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.1.0/twispay.zip)
 * Fix - IPN die() error messages
