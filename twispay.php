@@ -544,7 +544,7 @@ class Twispay extends PaymentModule
         foreach ($products as $product) {
             $items[] = ['item' => $product['name']
                        ,'units' =>  (int)$product['cart_quantity']
-                       ,'unitPrice' => number_format((float)$product['price_wt'], 2)
+                       ,'unitPrice' => round($product['price_wt'], 2)
                        ];
         }
 
@@ -552,7 +552,7 @@ class Twispay extends PaymentModule
         $order_inputs = array();
         $order_inputs['orderId'] = $this->buildOrderId($cart->id);
         $order_inputs['type'] = $this->getOrderType();
-        $order_inputs['amount'] = (float)number_format((float)$cart->getOrderTotal(true, Cart::BOTH), 2, '.', '');
+        $order_inputs['amount'] = round((float)$cart->getOrderTotal(true, Cart::BOTH), 2);
 
         $currency = new Currency((int)$cart->id_currency);
         $order_inputs['currency'] = $currency->iso_code;
