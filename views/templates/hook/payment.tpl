@@ -1,6 +1,6 @@
 {**
 * @author   Twispay
-* @version  1.0.1
+* @version  1.4.0
 *}
 
 <!-- Payment selector for prestashop versions <= 1.7 -->
@@ -24,3 +24,12 @@
 		</p>
 	</div>
 </div>
+
+{if $isIframe}
+  <script type="text/javascript">
+    var twispayButtonsSelectors = [
+		  '#twispay_payment_button'
+	  ];
+  </script>
+  <script type="text/javascript" src="{$iframeScriptUrl}"></script>
+{/if}
