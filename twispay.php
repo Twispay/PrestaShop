@@ -1,7 +1,7 @@
 <?php
     /**
      * @author   Twispay
-     * @version  1.4.0
+     * @version  1.4.1
      */
 
     require _PS_MODULE_DIR_.'twispay/classes/Twispay_Encoder.php';
@@ -480,10 +480,6 @@
                 ->setCallToActionText($this->l('Pay by credit or debit card'))
                 ->setForm($this->fetch('module:twispay/views/templates/hook/twispay_payment_form.tpl'))
                 ->setAdditionalInformation($this->fetch('module:twispay/views/templates/hook/twispay_payment_extra.tpl'));
-
-            if (Configuration::get('TWISPAY_IFRAME_FORM')) {
-                $newOption->setBinary(true);
-            }
 
             $payment_options = array(
                 $newOption
