@@ -2,7 +2,7 @@
 
 Tags: _payment_, _gateway_, _module_  
 Requires at least: Prestashop v *1.6.1.0*  
-Tested up to: Prestashop v *8.1.1*  
+Tested up to: Prestashop v *8.1.6*  
 PrestaShop Module: Download [twispay.zip](https://github.com/Twispay/PrestaShop/releases/latest/download/twispay.zip) from [Latest Release](https://github.com/Twispay/PrestaShop/releases/latest)
 
 
@@ -59,6 +59,16 @@ Install
 
 Changelog
 =========
+
+= 1.5.1 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.5.1/twispay.zip)
+* Minor fixes and version updates
+
+= 1.5.0 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.5.0/twispay.zip)
+* Changed order creation and statuses
+
+= 1.4.0 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.4.0/twispay.zip)
+* Add iframe for payment page
+  
 = 1.3.1 = [Download](https://github.com/Twispay/PrestaShop/releases/download/v1.3.1/twispay.zip)
 * Fix an issue with prices over 1000
 
