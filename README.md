@@ -2,7 +2,7 @@
 
 Tags: _payment_, _gateway_, _module_  
 Requires at least: Prestashop v *1.6.1.0*  
-Tested up to: Prestashop v *8.1.6*  
+Tested up to: Prestashop v *8.2.0*  
 PrestaShop Module: Download [twispay.zip](https://github.com/Twispay/PrestaShop/releases/latest/download/twispay.zip) from [Latest Release](https://github.com/Twispay/PrestaShop/releases/latest)
 
 
